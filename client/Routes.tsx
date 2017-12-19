@@ -22,7 +22,7 @@ export function Routes() {
   return (
     <div>
       <header>
-        <h1><Link to='/'>Fireworq</Link></h1>
+        <h1><Link to='/'><img src="/images/logo-white.png" alt="Fireworq" title="Fireworq" /></Link></h1>
         <nav><ul>
           <li><Link to='/nodes' >Nodes</Link></li>
           <li><Link to='/queues' >Queues</Link></li>

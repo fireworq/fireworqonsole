@@ -91,6 +91,8 @@ func main() {
 
 	s.mux.Handle("/js/{_:.*}", static)
 	s.mux.Handle("/css/{_:.*}", static)
+	s.mux.Handle("/images/{_:.*}", static)
+	s.mux.Handle("/favicon.ico", static)
 
 	s.Handle(prefix+"/{_:.*}", upstream.ServeReverseProxy)
 
