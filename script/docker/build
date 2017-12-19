@@ -1,0 +1,27 @@
+#!/bin/sh
+
+DIR=$(cd "$(dirname "$0")"; pwd)
+ROOT=$(cd "$DIR/../.."; pwd)
+cd "$ROOT"
+
+DOCKER_IMAGE='fireworqonsole'
+SRC_DIR='/go/src/github.com/fireworq/fireworqonsole'
+
+docker inspect "$DOCKER_IMAGE" >/dev/null 2>&1 || {
+    docker build \
+           --force-rm=true \
+           --build-arg NODE_VERSION=$(cat .node-version) \
+           -t "$DOCKER_IMAGE" \
+           script/docker/fireworqonsole
+}
+
+docker run --rm \
+       --name fireworqonsole-build \
+       --workdir "$SRC_DIR" \
+       --env USER_ID=$(id -ur) \
+       --env GROUP_ID=$(id -gr) \
+       --env GOOS="$GOOS" \
+       --env GOARCH="$GOARCH" \
+       -v "$ROOT":"$SRC_DIR" \
+       "$DOCKER_IMAGE" \
+       "$SRC_DIR"/script/docker/fireworqonsole/entrypoint.build.sh

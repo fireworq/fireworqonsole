@@ -1,0 +1,1542 @@
+html, body {
+  height: 100%;
+  background-color: white;
+}
+
+a, a:hover, a:link, a:active, a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+input:placeholder-shown,
+input::-webkit-input-placeholder,
+input::-moz-placeholder,
+input::-ms-input-placeholder {
+  color: #cccccc;
+  opacity: 1;
+}
+
+body {
+  font-family: -apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Segoe UI',Meiryo,sans-serif;
+  margin: 0;
+}
+
+header, div.main {
+  padding: 0 2em;
+}
+
+header {
+  background-color: #44ccaa;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0;
+  color: #eeffee;
+}
+
+header h1 {
+  font-size: 160%;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li {
+  margin-left: 1.5em;
+}
+
+header nav ul li:not(.external) + li.external:before {
+  content: "";
+  border-left: solid 1px #99ddbb;
+  margin-right: 1.5em;
+}
+
+footer {
+  clear: both;
+  margin: 4em 2em 1em 2em;
+  padding: 0.3em;
+  border-top: solid 1px #cceedd;
+  text-align: right;
+  font-size: 130%;
+  color: #666666;
+}
+
+footer * {
+  font-size: 75%;
+}
+
+div.main {
+  font-size: 130%;
+  margin: 1em 0 2em 0;
+}
+
+.loader > div {
+  border-width: 3px !important;
+  border-color: #99ffcc !important;
+  border-bottom-color: transparent !important;
+}
+
+/* Welcome */
+
+.welcome h3 {
+  margin-top: 2em;
+}
+
+.welcome p,
+.welcome dl {
+  max-width: 30em;
+}
+
+.welcome dl a {
+  color: #339977;
+
+}
+
+.welcome dl.versions:empty {
+  display: none;
+}
+
+.welcome div.versions.none {
+  display: none;
+}
+
+/* About */
+
+.about h3 {
+  margin-top: 2em;
+}
+
+.about .versions.none {
+  display: none;
+}
+
+.about .versions > * {
+  border: none;
+}
+
+.about .versions > dt {
+  display: none;
+}
+
+.about .versions > dd {
+  padding-left: 0;
+}
+
+.about a {
+  color: #339977;
+}
+
+/* Credits */
+
+.credits ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.credits .package {
+  position: relative;
+  margin: 1em 0;
+  padding: 0.3em 0.8em;
+  color: #339977;
+  background-color: #cceedd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.credits .package:after {
+  content: "▼";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.3em 0.8em;
+}
+
+.credits .package.open:after {
+  content: "▽";
+}
+
+.credits .package h4 {
+  margin: 0;
+}
+
+.credits .package pre {
+  margin-left: 2em;
+  padding: 1em;
+  color: #666666;
+  background-color: #eeffee;
+  border-radius: 8px;
+}
+
+.credits .package:not(.open) pre {
+  display: none;
+}
+
+/* Nodes */
+
+.nodes h2:not(:first-child) {
+  margin-top: 2em;
+}
+
+/* Version */
+
+dl.versions > dt,
+dl.versions > dd {
+  font-family: monospace;
+  padding: 0.5em;
+}
+
+dl.versions > dt {
+  float: left;
+  clear: both;
+  width: 15em;
+  font-weight: bold;
+  padding-left: 0;
+}
+
+dl.versions > dt.version.node {
+  position: relative;
+  cursor: pointer;
+  color: inherit;
+  font-size: inherit;
+}
+
+dl.versions > dt.version.node:hover:before {
+  content: "🗑";
+  display: inline-block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin-top: -0.2em;
+  margin-left: -1.3em;
+  font-size: 150%;
+  font-weight: bold;
+  color: #ffeeee;
+  text-align: center;
+  background-color: #dd8888;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+}
+
+
+dl.versions > dd {
+  border-bottom: solid 1px #cceedd;
+  margin: 0.5em 0;
+  padding-left: 16em;
+}
+
+dl.versions > dd.valid:before {
+  content: "✓";
+  color: #339977;
+  margin-right: 0.5em;
+}
+
+dl.versions > dd.invalid {
+  color: #ff88aa;
+}
+
+dl.versions > dd.invalid:before {
+  content: "✖";
+  margin-right: 0.5em;
+}
+
+.versions.none {
+  color: #ffccdd;
+}
+
+.new-node {
+  height: 2.8em;
+}
+
+.new-node label {
+  margin-top: 1em;
+}
+
+.new-node label:before {
+  content: "➕";
+  font-weight: bold;
+  margin-right: 0.3em;
+}
+
+.new-node label {
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: 1.8em;
+  margin-right: 0.5em;
+  padding: 0.3em 0.5em 0.2em;
+  font-size: 90%;
+  font-weight: bold;
+  background-color: #55dd88;
+  border-radius: 8px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+  color: #eeffee;
+}
+
+.new-node input.new-node-url {
+  position: absolute;
+  left: -100%;
+  padding: 0.4em;
+  border: solid 2px #cceedd;
+  border-radius: 4px;
+}
+
+.new-node button {
+  position: absolute;
+  left: -100%;
+  margin-left: 0.5em;
+  cursor: pointer;
+  background-color: inherit;
+  color: #eeffee;
+  border: 1px solid #eeffee;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.new-node:focus-within .label-text {
+  display: none;
+}
+
+.new-node input.new-node-url:focus,
+.new-node:focus-within input.new-node-url {
+  display: inline-block;
+  position: relative;
+  left: 0;
+  width: 16em;
+  outline: none;
+}
+
+.new-node:focus-within button {
+  position: relative;
+  left: 0;
+}
+
+/* Settings */
+
+dl.settings .setting-value.none {
+  color: #ffccdd;
+}
+
+dl.settings > dt,
+dl.settings > dd {
+  font-family: monospace;
+  padding: 0.5em;
+}
+
+dl.settings > dt {
+  float: left;
+  clear: both;
+  width: 20em;
+  font-weight: bold;
+  padding-left: 0;
+}
+
+dl.settings > dd {
+  border-bottom: solid 1px #cceedd;
+  margin: 0.5em 0;
+  padding-left: 16em;
+}
+
+dl.settings .setting-diff {
+  margin: 0;
+  padding: 0;
+}
+
+dl.settings .setting-diff .setting-value {
+  color: #ff88aa;
+}
+
+.settings.none {
+  color: #ffccdd;
+}
+
+/* Actions */
+
+.actions .edit:before {
+  content: "✎";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 0.5em;
+  font-size: 110%;
+  font-weight: bold;
+  color: #eeffee;
+  text-align: center;
+  background-color: #55dd88;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+}
+
+.actions .delete:before {
+  content: "🗑";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  font-size: 110%;
+  font-weight: bold;
+  color: #ffeeee;
+  text-align: center;
+  background-color: #dd8888;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+}
+
+.actions .recycle:before {
+  content: "⟳";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 0.5em;
+  font-size: 110%;
+  font-weight: bold;
+  color: #eeffee;
+  text-align: center;
+  background-color: #55dd88;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+}
+
+/* QueueList */
+
+.queue-list a:hover {
+  background-color: #f3fff8;
+  border-radius: 8px;
+}
+
+.queue-list .queue {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-bottom: solid 1px #cceedd;
+  padding: 0.5em 0;
+}
+
+.queue-list .queue.none {
+  border-bottom-style: none;
+}
+
+.queue-list .queue > *:not(:first-child) {
+  margin-left: 2em;
+}
+
+.queue-list .queue .queue-name {
+  min-width: 8em;
+  font-weight: bold;
+  float: left;
+  clear: both;
+}
+
+.queue-list .queue .actions {
+  margin-top: -3px;
+  margin-left: 0.5em;
+}
+
+.queue-list .queue .actions > * {
+  display: block;
+}
+.queue-list .queue .actions > *:before {
+  width: 26px;
+  height: 26px;
+  font-size: 90%;
+  border-radius: 13px;
+}
+
+.queue-list .queue .links {
+  margin-left: 0.5em;
+}
+
+.queue-list .queue .links a {
+  display: block;
+  font-size: 75%;
+  color: #eeffee;
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+}
+
+.queue-list .queue .links .jobs {
+  background-color: #55dd88;
+}
+
+.queue-list .queue .links .failures {
+  margin-top: 0.2em;
+  background-color: #dd8888;
+}
+
+.queue-list .queue dl.config {
+  min-width: 12em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.queue-list .queue dl.config > * {
+  font-size: 90%;
+}
+
+.queue-list .queue dl.config dt {
+  color: #555555;
+  float: left;
+  clear: both;
+  width: 8em;
+}
+
+.queue-list .queue dl.config dd {
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+
+.queue-list .new-queue label {
+  margin-top: 1em;
+}
+
+.queue-list .new-queue label:before {
+  content: "➕";
+  font-weight: bold;
+  margin-right: 0.3em;
+}
+
+.queue-list .new-queue label {
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: 1.8em;
+  margin-right: 0.5em;
+  padding: 0.3em 0.5em 0.2em;
+  font-size: 90%;
+  font-weight: bold;
+  background-color: #55dd88;
+  border-radius: 8px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+  color: #eeffee;
+}
+
+.queue-list .new-queue input.new-queue-name {
+  position: absolute;
+  left: -100%;
+  padding: 0.4em;
+  border: solid 2px #cceedd;
+  border-radius: 4px;
+}
+
+.queue-list .new-queue button {
+  position: absolute;
+  left: -100%;
+  margin-left: 0.5em;
+  cursor: pointer;
+  background-color: inherit;
+  color: #eeffee;
+  border: 1px solid #eeffee;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.queue-list .new-queue:focus-within .label-text {
+  display: none;
+}
+
+.queue-list .new-queue input.new-queue-name:focus,
+.queue-list .new-queue:focus-within input.new-queue-name {
+  display: inline-block;
+  position: relative;
+  left: 0;
+  width: 16em;
+  outline: none;
+}
+
+.queue-list .new-queue:focus-within button {
+  position: relative;
+  left: 0;
+}
+
+/* Queue Tabs */
+
+.queue-page {
+  position: relative;
+  margin-bottom: 20em;
+}
+
+nav.queue-tabs {
+  position: absolute;
+  width: 100%;
+  font-size: 100%;
+  color: #555555;
+  border-bottom: solid 1px #cceedd;
+}
+
+nav.queue-tabs ul {
+  float: right;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  list-style-type: none;
+  margin: 0 40px 0 0;
+  padding: 0;
+}
+
+nav.queue-tabs ul li {
+  margin: 0 1em -1px 0;
+  padding: 0.4em;
+  border: solid 1px transparent;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+nav.queue-tabs ul li.selected {
+  color: #77aa99;
+  border-color: #cceedd #cceedd white #cceedd;
+}
+
+nav.queue-tabs ul li:hover {
+  background-color: #f3fff8;
+  border-bottom-color: #cceedd;
+}
+
+nav.queue-tabs ul li.selected:hover {
+  border-bottom-color: white;
+}
+
+/* Queue */
+
+.queue.none {
+  color: #ffccdd;
+}
+
+dl.queue > dt {
+  color: #555555;
+  font-weight: bold;
+}
+
+dl.queue > dt,
+dl.queue > dd {
+  margin-bottom: 0.5em;
+  font-size: 90%;
+}
+
+dl.queue dd.config-value {
+  position: relative;
+}
+
+dl.queue dd.config-value .unit {
+  margin-left: 0.2em;
+}
+
+dl.queue dd.config-value input {
+  width: 5em;
+  padding: 0.4em;
+  border: solid 2px #cceedd;
+  border-radius: 4px;
+}
+
+dl.queue dd.config-value input:focus {
+  outline: none;
+  border-color: #88dd99;
+}
+
+dl.queue > dd .loader {
+  height: 1.35em;
+}
+
+dl.queue > dd .loader > div {
+  width: 15px;
+  height: 15px;
+}
+
+form.queue-edit button {
+  padding: 0.5em;
+  border-style: none;
+  border-radius: 8px;
+  background-color: #55dd88;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+  color: #eeffee;
+  font-size: 90%;
+  cursor: pointer;
+}
+
+form.queue-edit button:hover {
+  background-color: #cceedd;
+}
+
+form.queue-edit dl.queue dd.config-value:hover:before {
+  display: none;
+}
+
+dl.queue dd.config-value:hover:before,
+.queue-list .queue dl.config:hover:before {
+  content: "✎";
+  display: inline-block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin-top: -0.2em;
+  margin-left: -1.5em;
+  font-size: 110%;
+  font-weight: bold;
+  color: #eeffee;
+  text-align: center;
+  background-color: #55dd88;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+}
+
+/* Node */
+
+.node {
+  font-size: 90%;
+  color: #666666;
+}
+
+.node .host {
+  font-family: monospace;
+}
+
+.node .id {
+  margin-left: 0.5em;
+  font-size: 80%;
+}
+
+.node.none {
+  font-size: 80%;
+  color: #ffccdd;
+}
+
+/* Stats */
+
+.stats .none {
+  color: #ffccdd;
+}
+
+.stats.chart {
+  font-family: monospace;
+  font-size: 70%;
+  white-space: nowrap;
+}
+
+.stats.chart > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.stats.chart .velocity {
+  margin-right: 1em;
+  min-width: 7em;
+}
+
+.stats.chart .velocity > * {
+  color: #333333;
+  height: 1.6em;
+}
+
+.stats.chart .label {
+  clear: both;
+  padding-left: 0.4em;
+  height: 1.6em;
+  box-sizing: border-box;
+}
+
+.stats.chart .pushed {
+  color: #666666;
+  background-color: #eeeeee;
+  border-top-right-radius: 6px;
+  height: 4.8em;
+}
+
+.stats.chart .grabbed {
+  color: #333333;
+  background-color: #bbbbbb;
+  border-top-right-radius: 6px;
+  height: 3.2em;
+}
+
+.stats.chart .pushed > a > .label,
+.stats.chart .grabbed > a > .label {
+  min-width: 16em;
+}
+
+.stats.chart .pushed > a > .label:hover,
+.stats.chart .grabbed > a  .label:hover {
+  background-color: #f3fff8;
+  border-radius: 8px;
+}
+
+.stats.chart .label .total {
+  min-width: 8em;
+}
+
+.stats.chart .completed {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.stats.chart .completed .label {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  min-width: 4em;
+  width: 100%;
+  position: absolute;
+  padding: 0;
+}
+
+.stats.chart .completed .label .ok,
+.stats.chart .completed .label .failed {
+  padding-left: 0.4em;
+  box-sizing: border-box;
+}
+
+.stats.chart .completed .label .ok {
+  min-width: 3em;
+  color: #229955;
+}
+
+.stats.chart .completed .label .failed {
+  color: #992222;
+}
+
+.stats.chart .completed > .ok {
+  display: block;
+  background-color: #ccffdd;
+  height: 1.6em;
+}
+
+.stats.chart .completed > .failed {
+  display: block;
+  background-color: #ffccdd;
+  border-top-right-radius: 6px;
+  height: 1.6em;
+}
+
+/* NewJob */
+
+.new-job dl > dt {
+  color: #555555;
+  font-weight: bold;
+}
+
+.new-job dl > dt,
+.new-job dl > dd {
+  margin-bottom: 0.5em;
+  font-size: 90%;
+}
+
+.new-job dl dd {
+  position: relative;
+}
+
+.new-job dl dd input,
+.new-job dl dd textarea {
+  width: 20em;
+  padding: 0.4em;
+  border: solid 2px #cceedd;
+  border-radius: 4px;
+}
+
+.new-job dl dd textarea {
+  font-family: monospace;
+}
+
+.new-job dl dd input:focus,
+.new-job dl dd textarea:focus {
+  outline: none;
+  border-color: #88dd99;
+}
+
+.new-job dl dd .unit {
+  margin-left: 0.2em;
+}
+
+.new-job .options {
+  margin-bottom: 1.5em;
+}
+
+.new-job .options input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.new-job .options input[type="checkbox"] + label:before {
+  display: inline-block;
+  position: absolute;
+  width: 1.1em;
+  height: 1.3em;
+  left: 0;
+  padding-left: 0.2em;
+  font-size: 90%;
+  content: " ";
+  color: #88dd99;
+  border: 2px solid #cceedd;
+  border-radius: 4px;
+}
+
+.new-job .options input[type="checkbox"]:checked + label:before {
+  content: "✓";
+}
+
+.new-job .options input[type="checkbox"] + label {
+  margin-left: 1em;
+  cursor: pointer;
+}
+
+.new-job .options label[for="remove-log-item"] a {
+  color: #dd8888;
+}
+
+.new-job .loader {
+  height: 1.35em;
+}
+
+.new-job .loader > div {
+  width: 15px;
+  height: 15px;
+}
+
+.new-job button {
+  padding: 0.5em;
+  border-style: none;
+  border-radius: 8px;
+  background-color: #55dd88;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+  color: #eeffee;
+  font-size: 90%;
+  cursor: pointer;
+}
+
+.new-job button:hover {
+  background-color: #cceedd;
+}
+
+/* Job */
+
+.job.single.none {
+  color: #ffccdd;
+}
+
+.job.single dl > dt {
+  color: #555555;
+  font-weight: bold;
+}
+
+.job.single dl > dt,
+.job.single dl > dd {
+  margin-bottom: 0.5em;
+  font-size: 90%;
+}
+
+.job.single dl > dd .url {
+  font-family: monospace;
+}
+
+.job.single dl > dd .elapsed.long {
+  color: #aa4499;
+}
+
+.job.single dl > dd .second:after {
+  content: " sec.";
+}
+
+.job.single dl > dd .tried.failed {
+  color: #aa4499;
+}
+
+.job.single dl > dd pre {
+  white-space: pre-wrap;
+  margin: 0;
+  background-color: #eeeeee;
+  padding: 1em;
+  border-radius: 8px;
+}
+
+/* JobList */
+
+.jobs.none {
+  color: #ffccdd;
+}
+
+.jobs > div {
+  position: relative;
+  width: 100%;
+  padding: 0.5rem 2.5rem 0 2.5rem;
+  box-sizing: border-box;
+}
+
+.jobs > div > .list,
+.jobs > div.none > div {
+  border-left: solid 4px #cceedd;
+  border-right: solid 4px #cceedd;
+}
+
+.jobs > div.none > div {
+  color: #999999;
+  padding-left: 1rem;
+  padding-bottom: 4rem;
+}
+
+.jobs > div .partition {
+  position: absolute;
+  margin-left: -1.5rem;
+  transform: translateX(-50%) rotate(-90deg);
+  font-size: 80%;
+  font-weight: bold;
+  color: #666666;
+  z-index: 10;
+}
+
+.jobs > div .partition + * {
+  z-index: 1;
+}
+
+.jobs > div .partition .hint {
+  position: relative;
+}
+
+.jobs > div .partition .hint .description {
+  display: none;
+  position: absolute;
+  left: 100%;
+  margin-top: 2em;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  color: #cccccc;
+  background-color: #000;
+  border: 1px solid #000;
+  transform-origin: top left;
+  transform: rotate(90deg);
+  min-width: 30em;
+  opacity: 0.8;
+}
+
+.jobs > div .partition .hint .description:before {
+  position: absolute;
+  content: "";
+  top: 3em;
+  left: -30px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-right: 15px solid #000;
+}
+
+.jobs > div .partition .hint:hover .description {
+  display: block;
+}
+
+.jobs > div .partition .hint .description > *:first-child {
+  margin-top: 0;
+}
+
+.jobs > div > .loader {
+  text-align: center;
+  height: 6rem;
+  padding: 2rem 0;
+  box-sizing: border-box;
+  border-left: dashed 4px #cceedd;
+  border-right: dashed 4px #cceedd;
+}
+
+.jobs > div > .loader + .next {
+  display: none;
+}
+
+.jobs > div > .next {
+  text-align: center;
+  cursor: pointer;
+  color: #ccffdd;
+  border-left: dashed 4px #cceedd;
+  border-right: dashed 4px #cceedd;
+}
+
+.jobs > div.has-next:before,
+.jobs > div.has-next:after {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  bottom: 1.5em;
+  width: 2em;
+  height: 1em;
+  background-color: white;
+  background-size: 2em 1em;
+  background-repeat: no-repeat;
+  background-image: url('data:image/svg+xml,<svg width="64" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 8 Q 16 0 32 8 Q 48 16 64 8 M0 24 Q 16 16 32 24 Q 48 32 64 24" stroke="#88aa99" stroke-width="1" fill="transparent"/></svg>')
+}
+
+.jobs > div.has-next:before {
+  left: 0;
+  margin-left: 1em;
+}
+
+.jobs > div.has-next:after {
+  right: 0;
+  margin-right: 1em;
+}
+
+.jobs > div > .next:after {
+  display: block;
+  content: "▼";
+  margin: 0 2rem;
+  padding: 2rem 0;
+  box-sizing: border-box;
+  height: 6rem;
+  color: #99ffbb;
+}
+
+.jobs > div > .next:hover:after {
+  background-color: #f3fff8;
+  border-radius: 8px;
+}
+
+.jobs .list {
+  width: 100%;
+  color: #333333;
+  font-size: 85%;
+}
+
+.jobs .list tr:nth-child(4n+1),
+.jobs .list tr:nth-child(4n+2) {
+  background-color: #eefff3;
+}
+
+.jobs .list tr:nth-child(4n+3),
+.jobs .list tr:nth-child(4n+4) {
+  background-color: #fafffe;
+}
+
+.jobs .list tr:hover {
+  background-color: #bbffdd;
+}
+
+.jobs .list td {
+  padding: 0.5em;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.jobs .list td a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.jobs .list .job dl {
+  margin: 0;
+  padding: 0;
+}
+
+.jobs .list .job dl dt {
+  float: left;
+  clear: both;
+  color: #888888;
+}
+
+.jobs .list .job dl dd {
+  float: left;
+  margin-left: 0.5em;
+}
+
+.jobs .list .job .second:after {
+  content: " sec.";
+}
+
+.jobs .list .job .identity {
+  width: 20em;
+}
+
+.jobs .list .job .identity .id {
+  float: left;
+  color: #666666;
+}
+
+.jobs .list .job .identity .category {
+  font-weight: bold;
+  float: left;
+  margin-left: 1em;
+}
+
+.jobs .list .job .identity .actions {
+  float: left;
+  margin-left: 1em;
+  margin-top: -1px;
+}
+
+.jobs .list .job .identity .actions > *:before {
+  width: 22px;
+  height: 22px;
+  font-size: 90%;
+  border-radius: 11px;
+}
+
+
+.jobs .list .job .identity .url {
+  clear: both;
+  font-family: monospace;
+  color: #666666;
+}
+
+.jobs .list .job .status {
+  width: 4.5em;
+}
+
+.jobs .list .job .status.claimed {
+  font-style: italic;
+  color: #666666;
+}
+
+.jobs .list .job .status.grabbed {
+  font-weight: bold;
+  color: #444444;
+}
+
+.jobs .list .job .timestamp {
+  font-size: 80%;
+  width: 18em;
+}
+
+.jobs .list .job .timestamp dl dt {
+  width: 6em;
+}
+
+.jobs .list .job .timestamp .elapsed.long {
+  color: #aa4499;
+}
+
+.jobs .list .job .tries {
+  font-size: 80%;
+  width: 10em;
+}
+
+.jobs .list .job .tries dl dt {
+  width: 4.5em;
+}
+
+.jobs .list .job .tries .count .failed {
+  color: #aa4499;
+}
+
+.jobs .list .job .payload pre {
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.jobs > div.failed > .list,
+.jobs > div.failed.none > div {
+  border-left-color: #eeccdd;
+  border-right-color: #eeccdd;
+}
+
+.jobs > div.failed > .loader {
+  border-left-color: #eeccdd;
+  border-right-color: #eeccdd;
+}
+
+.jobs > div.failed > .next {
+  border-left-color: #eeccdd;
+  border-right-color: #eeccdd;
+}
+
+.jobs > div.failed.has-next:before,
+.jobs > div.failed.has-next:after {
+  background-image: url('data:image/svg+xml,<svg width="64" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 8 Q 16 0 32 8 Q 48 16 64 8 M0 24 Q 16 16 32 24 Q 48 32 64 24" stroke="#aa8899" stroke-width="1" fill="transparent"/></svg>')
+}
+
+.jobs > div.failed > .next:after {
+  color: #ff99bb;
+}
+
+.jobs > div.failed > .next:hover:after {
+  background-color: #fff3f8;
+}
+
+.jobs .failed .list tr:nth-child(4n+1),
+.jobs .failed .list tr:nth-child(4n+2) {
+  background-color: #ffeef3;
+}
+
+.jobs .failed .list tr:nth-child(4n+3),
+.jobs .failed .list tr:nth-child(4n+4) {
+  background-color: #fffafe;
+}
+
+.jobs .failed .list tr:hover {
+  background-color: #ffbbdd;
+}
+
+.jobs .list .job .result {
+  font-size: 80%;
+  width: 30em;
+}
+
+.jobs .list .job .result dl dt {
+  width: 5em;
+}
+
+.jobs .list .job .result .message pre {
+  max-width: 60em;
+  max-height: 40em;
+  overflow: auto;
+}
+
+/* RoutingList */
+
+.routing-list a:hover {
+  background-color: #f3fff8;
+  border-radius: 8px;
+}
+
+.routing-list .routing > * {
+  text-align: left;
+  border-bottom: solid 1px #cceedd;
+  padding: 0.5em 0;
+}
+
+.routing-list .routing > *:nth-child(2n),
+.routing-list .routing > *:nth-child(3n) {
+  padding-left: 2em;
+}
+
+.routing-list .routing.none {
+  border-bottom-style: none;
+}
+
+.routing-list .routing.head {
+  color: #555555;
+}
+
+.routing-list .new-routing label {
+  margin-top: 1em;
+}
+
+.routing-list .new-routing label:before {
+  content: "➕";
+  font-weight: bold;
+  margin-right: 0.3em;
+}
+
+.routing-list .new-routing label {
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: 1.8em;
+  margin-right: 0.5em;
+  padding: 0.3em 0.5em 0.2em;
+  font-size: 90%;
+  font-weight: bold;
+  background-color: #55dd88;
+  border-radius: 8px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+  color: #eeffee;
+}
+
+.routing-list .new-routing input.new-job-category {
+  position: absolute;
+  left: -100%;
+  padding: 0.4em;
+  border: solid 2px #cceedd;
+  border-radius: 4px;
+}
+
+.routing-list .new-routing button {
+  position: absolute;
+  left: -100%;
+  margin-left: 0.5em;
+  cursor: pointer;
+  background-color: inherit;
+  color: #eeffee;
+  border: 1px solid #eeffee;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.routing-list .new-routing:focus-within .label-text {
+  display: none;
+}
+
+.routing-list .new-routing input.new-job-category:focus,
+.routing-list .new-routing:focus-within input.new-job-category {
+  display: inline-block;
+  position: relative;
+  left: 0;
+  width: 16em;
+  outline: none;
+}
+
+.routing-list .new-routing:focus-within button {
+  position: relative;
+  left: 0;
+}
+
+/* Routing */
+
+.routing.none {
+  color: #ffccdd;
+}
+
+dl.routing > dt {
+  color: #555555;
+  font-weight: bold;
+}
+
+dl.routing > dt,
+dl.routing > dd {
+  margin-bottom: 0.5em;
+  font-size: 90%;
+}
+
+dl.routing dd.job-category {
+  position: relative;
+  cursor: pointer;
+}
+
+dl.routing dd.job-category:hover:before {
+  content: "🗑";
+  display: inline-block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin-top: -0.2em;
+  margin-left: -1.5em;
+  font-size: 110%;
+  font-weight: bold;
+  color: #ffeeee;
+  text-align: center;
+  background-color: #dd8888;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+}
+
+dl.routing dd.config-value {
+  position: relative;
+}
+
+dl.routing dd.config-value select {
+  width: 15em;
+  padding: 0.4em;
+  border: solid 2px #cceedd;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+dl.routing dd.config-value select:focus {
+  outline: none;
+  border-color: #88dd99;
+}
+
+dl.routing > dd .loader {
+  height: 1.35em;
+}
+
+dl.routing > dd .loader > div {
+  width: 15px;
+  height: 15px;
+}
+
+form.routing-edit button {
+  padding: 0.5em;
+  border-style: none;
+  border-radius: 8px;
+  background-color: #55dd88;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+  color: #eeffee;
+  font-size: 90%;
+  cursor: pointer;
+}
+
+form.routing-edit button:hover {
+  background-color: #cceedd;
+}
+
+form.routing-edit dl.routing dd.config-value:hover:before {
+  display: none;
+}
+
+dl.routing dd.config-value:hover:before,
+.routing-list .routing .queue-name:hover:before {
+  content: "✎";
+  display: inline-block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin-top: -0.2em;
+  margin-left: -1.5em;
+  font-size: 110%;
+  font-weight: bold;
+  color: #eeffee;
+  text-align: center;
+  background-color: #55dd88;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+}
+
+/* AutoReload */
+
+.auto-reload {
+  float: right;
+}
+
+.queue-page .auto-reload {
+  position: absolute;
+  right: 0;
+}
+
+.auto-reload label {
+  display: inline-block;
+  cursor: pointer;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.auto-reload label span {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.auto-reload div.switch {
+  position: relative;
+  width: 22px;
+  height: 14px;
+  border-radius: 7px;
+  background-color: #a7aaa9;
+  overflow: hidden;
+}
+
+.auto-reload div.switch.active {
+  background-color: #4debbd;
+}
+
+.auto-reload div.switch:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  margin: 2px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.auto-reload div.switch:not(.active):after {
+  left: 0;
+}
+
+.auto-reload div.switch.active:after {
+  right: 0;
+}
+
+.auto-reload div.switch input {
+  position: absolute;
+  display: inline-block;
+  left: -100px;
+  width: calc(100% + 100px);
+  outline: 0;
+  margin: 0;
+  padding: 0;
+}

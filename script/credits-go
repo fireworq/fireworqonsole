@@ -1,0 +1,30 @@
+#!/bin/bash
+
+shopt -s globstar
+
+DIR=$(cd $(dirname "$0"); pwd)
+ROOT=$(cd "$DIR/.."; pwd)
+cd "$ROOT"
+
+json_license() {
+    pkg="$1"
+    dir="vendor/$pkg"
+    license=$(cat "$dir"/LICENSE* "$dir"/license* 2>/dev/null)
+    jq -n \
+       --arg pkg "$pkg" \
+       --arg url "https://$pkg/" \
+       --arg license "$license" \
+       '{"package": $pkg, "url": $url, "license": $license}'
+}
+
+echo -n '['; sep=','
+jq -n \
+   --arg pkg 'Go (the standard library)' \
+   --arg url 'https://golang.org/' \
+   --arg license "$(curl https://raw.githubusercontent.com/golang/go/release-branch.go1.9/LICENSE 2>/dev/null)" \
+   '{"package": $pkg, "url": $url, "license": $license}'
+for pkg in $(cat glide.lock | perl -ne 'exit if m!^testImports:!; print "$1\n" if m!^- name: (.*)$!'); do
+    echo -n "$sep"
+    json_license "$pkg"
+done
+echo ']'

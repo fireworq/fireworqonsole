@@ -1,0 +1,14 @@
+{
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-standard"],
+  "rules": {
+    "jsx-no-lambda": false,
+    "ordered-imports": false,
+    "space-before-function-paren": false,
+    "interface-name": false,
+    "prefer-object-spread": false,
+    "member-ordering": false,
+    "max-classes-per-file": false,
+    "object-literal-sort-keys": false,
+    "no-console": false
+  }
+}

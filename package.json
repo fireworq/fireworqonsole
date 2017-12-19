@@ -1,0 +1,35 @@
+{
+  "name": "Fireworqonsole",
+  "version": "0.1.0",
+  "description": "A web console for Fireworq",
+  "scripts": {
+    "dev": "webpack -w --colors --config ./webpack.config.dev.js",
+    "build": "webpack --colors --config ./webpack.config.dev.js",
+    "build:prod": "webpack --colors --config ./webpack.config.prod.js"
+  },
+  "author": "tarao",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/isomorphic-fetch": "0.0.34",
+    "@types/react": "^15.6.0",
+    "@types/react-dom": "^15.5.1",
+    "@types/react-redux": "^4.4.47",
+    "@types/react-router-dom": "^4.0.7",
+    "ts-loader": "^2.3.2",
+    "typescript": "^2.4.2",
+    "uglify-save-license": "^0.4.1",
+    "webpack": "^3.4.1"
+  },
+  "dependencies": {
+    "es6-promise": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1",
+    "loaders.css": "^0.1.2",
+    "moment": "^2.18.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.2",
+    "react-time": "^4.3.0",
+    "redux": "^3.7.2"
+  }
+}
