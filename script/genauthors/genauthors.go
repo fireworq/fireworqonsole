@@ -125,13 +125,6 @@ func main() {
 		emails = append(emails, k)
 	}
 
-	gitHubUsers := getGitHubLoginNames(emails)
-	for _, c := range contributions {
-		if login, ok := gitHubUsers[c.Email]; ok {
-			c.Login = login
-		}
-	}
-
 	sort.Slice(items, func(i, j int) bool {
 		diff := items[i].Commits - items[j].Commits
 		return diff > 0 || (diff == 0 && items[i].Email < items[j].Email)
@@ -139,6 +132,12 @@ func main() {
 
 	tmpl := plain
 	if *format == "markdown" {
+		gitHubUsers := getGitHubLoginNames(emails)
+		for _, c := range contributions {
+			if login, ok := gitHubUsers[c.Email]; ok {
+				c.Login = login
+			}
+		}
 		tmpl = markdown
 	}
 
