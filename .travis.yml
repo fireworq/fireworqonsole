@@ -13,6 +13,7 @@ script:
 
 after_script:
   - script/ci/genauthors
+  - script/ci/can-release && script/ci/release
 
 env:
   global:
