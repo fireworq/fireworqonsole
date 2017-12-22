@@ -16,7 +16,7 @@ build: generate
 	go-bindata -pkg assets -o assets/bindata.go -debug assets/...
 	${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=DEBUG" -o ${BUILD_OUTPUT}/$(BIN) .
 
-release: npmbuild credits generate
+release: npmbuild deps credits generate
 	go-bindata -pkg assets -o assets/bindata.go assets/...
 	CGO_ENABLED=0 ${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=$(PRERELEASE)" -o ${BUILD_OUTPUT}/$(BIN) .
 
