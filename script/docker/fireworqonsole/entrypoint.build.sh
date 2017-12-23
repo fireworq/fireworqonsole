@@ -23,4 +23,4 @@ sync
 
 gosu docker make clean
 gosu docker make release PRERELEASE=''
-gosu docker ./fireworqonsole --credits > CREDITS
+GOOS= GOARCH= gosu docker go run *.go --credits > CREDITS
