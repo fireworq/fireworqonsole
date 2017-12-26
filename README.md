@@ -7,12 +7,16 @@ A console to manage [Fireworq][] daemons on a Web UI.
 
 ## <a name="start">Getting Started</a>
 
-A release build is available on [the releases page][releases].  You
-will get `./fireworqonsole` by the following commands.
+A release build is available on [the releases page][releases].
+
+For example, the following commands download and extract the
+Fireworqonsole binary for Linux AMD64 (x86-64) platform.
 
 ```
-$ curl -L  $(curl -sL  https://api.github.com/repos/fireworq/fireworqonsole/releases/latest | jq -r '.assets[].browser_download_url' | grep '_linux_amd64.zip') > fireworqonsole_linux_amd64.zip
-$ unzip fireworqonsole_linux_amd64.zip fireworqonsole
+$ OS=linux
+$ ARCH=amd64
+$ curl -L  $(curl -sL  https://api.github.com/repos/fireworq/fireworqonsole/releases/latest | jq -r '.assets[].browser_download_url' | grep "_${OS}_${ARCH}.zip") > fireworqonsole_${OS}_${ARCH}.zip
+$ unzip fireworqonsole_${OS}_${ARCH}.zip fireworqonsole
 ```
 
 Run `fireworqonsole` by the following command.

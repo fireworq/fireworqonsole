@@ -13,19 +13,19 @@ all: clean build
 build: generate
 	npm install
 	npm run build
-	go-bindata -pkg assets -o assets/bindata.go -debug assets/...
+	GOOS= GOARCH= go-bindata -pkg assets -o assets/bindata.go -debug assets/...
 	${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=DEBUG" -o ${BUILD_OUTPUT}/$(BIN) .
 
 release: npmbuild deps credits generate
-	go-bindata -pkg assets -o assets/bindata.go assets/...
+	GOOS= GOARCH= go-bindata -pkg assets -o assets/bindata.go assets/...
 	CGO_ENABLED=0 ${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=$(PRERELEASE)" -o ${BUILD_OUTPUT}/$(BIN) .
 
 run: build
 	npm run dev & ./${BIN} --bind=${BIND} --node=${NODE} & wait
 
 deps:
-	glide install
-	${GO} get github.com/jteeuwen/go-bindata/...
+	GOOS= GOARCH= glide install
+	GOOS= GOARCH= ${GO} get github.com/jteeuwen/go-bindata/...
 
 npmbuild:
 	npm install
@@ -33,14 +33,14 @@ npmbuild:
 	npm prune --production
 
 credits:
-	${GO} run script/genauthors/genauthors.go > AUTHORS
+	GOOS= GOARCH= ${GO} run script/genauthors/genauthors.go > AUTHORS
 	script/credits-go > CREDITS.go.json
 	script/credits-npm > CREDITS.npm.json
 
 generate: deps
 	touch AUTHORS
 	touch CREDITS.go.json CREDITS.npm.json
-	go generate -x ./...
+	GOOS= GOARCH= ${GO} generate -x ./...
 
 clean:
 	rm -f **/bindata.go assets.go CREDITS.go.json CREDITS.npm.json
