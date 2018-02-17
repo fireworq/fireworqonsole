@@ -10,5 +10,5 @@ import:
   version: origin/master
   subpackages:
   - listener
-- package: github.com/elazarl/go-bindata-assetfs
+- package: github.com/jessevdk/go-assets
   version: origin/master
