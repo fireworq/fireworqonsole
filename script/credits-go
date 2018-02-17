@@ -21,7 +21,7 @@ echo -n '['; sep=','
 jq -n \
    --arg pkg 'Go (the standard library)' \
    --arg url 'https://golang.org/' \
-   --arg license "$(curl https://raw.githubusercontent.com/golang/go/release-branch.go1.9/LICENSE 2>/dev/null)" \
+   --arg license "$(curl https://raw.githubusercontent.com/golang/go/release-branch.go1.10/LICENSE 2>/dev/null)" \
    '{"package": $pkg, "url": $url, "license": $license}'
 for pkg in $(cat glide.lock | perl -ne 'exit if m!^testImports:!; print "$1\n" if m!^- name: (.*)$!'); do
     echo -n "$sep"
