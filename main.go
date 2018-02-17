@@ -1,4 +1,4 @@
-//go:generate go-bindata -pkg main -o assets.go LICENSE AUTHORS CREDITS.go.json CREDITS.npm.json
+//go:generate go-assets-builder -p main -o assets.go LICENSE AUTHORS CREDITS.go.json CREDITS.npm.json
 package main
 
 import (
@@ -7,6 +7,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
@@ -19,7 +20,6 @@ import (
 	"golang.org/x/net/proxy"
 
 	log "github.com/Sirupsen/logrus"
-	assetfs "github.com/elazarl/go-bindata-assetfs"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	serverstarter "github.com/lestrrat/go-server-starter/listener"
@@ -32,6 +32,7 @@ func main() {
 		bind            string
 		nodes           nodes
 		shutdownTimeout uint
+		debug           bool
 		showVersion     bool
 		showLicense     bool
 		showCredits     bool
@@ -44,6 +45,7 @@ func main() {
 		fmt.Fprint(out, helpText)
 	}
 
+	flags.BoolVar(&debug, "debug", false, "")
 	flags.BoolVar(&showVersion, "v", false, "")
 	flags.BoolVar(&showVersion, "version", false, "")
 	flags.BoolVar(&showLicense, "license", false, "")
@@ -75,7 +77,13 @@ func main() {
 		logger: os.Stdout,
 		mux:    mux.NewRouter().SkipClean(true),
 	}
-	static := http.FileServer(&assetfs.AssetFS{assets.Asset, assets.AssetDir, assets.AssetInfo, "assets"})
+
+	var fs http.FileSystem = assets.Assets
+	if debug {
+		fs = http.Dir("assets")
+	}
+	static := http.FileServer(fs)
+
 	prefix := "/api"
 	dialer := initProxy()
 	upstream := NewUpstream(prefix, nodes, dialer)
@@ -201,7 +209,7 @@ type PackageInfo struct {
 }
 
 func serveCredits(w http.ResponseWriter, req *http.Request) {
-	json := MustAsset("CREDITS.npm.json")
+	json := mustAsset("/CREDITS.npm.json")
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Content-Length", strconv.Itoa(len(json)))
 	w.WriteHeader(200)
@@ -213,8 +221,8 @@ func printCredits() {
 		creditsGo  []PackageInfo
 		creditsNpm []PackageInfo
 	)
-	json.Unmarshal(MustAsset("CREDITS.go.json"), &creditsGo)
-	json.Unmarshal(MustAsset("CREDITS.npm.json"), &creditsNpm)
+	json.Unmarshal(mustAsset("/CREDITS.go.json"), &creditsGo)
+	json.Unmarshal(mustAsset("/CREDITS.npm.json"), &creditsNpm)
 
 	credits := append(creditsGo, creditsNpm...)
 	for _, pkg := range credits {
@@ -224,6 +232,23 @@ func printCredits() {
 		fmt.Println(pkg.License)
 		fmt.Println("================================================================")
 	}
+}
+
+func mustAsset(path string) []byte {
+	f, err := Assets.Open(path)
+	if err != nil {
+		panic(err)
+	}
+
+	buf, err := ioutil.ReadAll(f)
+	if err != nil {
+		panic(err)
+	}
+	return buf
+}
+
+func mustAssetString(path string) string {
+	return string(mustAsset(path))
 }
 
 type nodes []url.URL
@@ -244,7 +269,7 @@ func (us *nodes) Set(value string) error {
 }
 
 var (
-	licenseText = string(MustAsset("LICENSE")) + `
+	licenseText = mustAssetString("/LICENSE") + `
    Copyright (c) 2017 The Fireworqonsole Authors. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -258,7 +283,8 @@ var (
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-` + string(MustAsset("AUTHORS"))
+
+` + mustAssetString("/AUTHORS")
 
 	helpText = `
 Usage: fireworqonsole [options]

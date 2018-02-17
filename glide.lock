@@ -1,14 +1,14 @@
-hash: 1b3630a79648bbb5f379fc18286e1d0dd70b67a2ff7d1f9d3e49d2fa2da94750
-updated: 2017-12-12T13:36:32.53264957+09:00
+hash: 022df420d68fcc2ffd73a06defae3f7304cf0c09c8fcfe3fada7f9d7866c01dc
+updated: 2018-02-17T20:08:41.667141947+09:00
 imports:
-- name: github.com/elazarl/go-bindata-assetfs
-  version: 30f82fa23fd844bd5bb1e5f216db87fd77b5eb43
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/handlers
   version: 90663712d74cb411cbef281bc1e08c19d1a76145
 - name: github.com/gorilla/mux
-  version: 7f08801859139f86dfafd1c296e2cba9a80d292e
+  version: 53c1911da2b537f792e7cafcb446b05ffe33b996
+- name: github.com/jessevdk/go-assets
+  version: 4f4301a06e153ff90e17793577ab6bf79f8dc5c5
 - name: github.com/lestrrat/go-server-starter
   version: f9cb0b066498d26a90fd918fe265adbb0ea02bcf
   subpackages:
