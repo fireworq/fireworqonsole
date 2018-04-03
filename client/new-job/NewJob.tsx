@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { NewJob } from '../job/module'
 import { ActionDispatcher } from './Container'
+import JSON from 'json-bigint'
 
 interface Props {
   job?: NewJob

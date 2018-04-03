@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import { ReduxAction, ReduxState } from '../store'
 import { FailedJobListValue, FailedJobList, failedJobListRetrieved, failedJobDeleted, fetchStarted, fetchFinished } from '../failed-job/module'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 import { snakeToCamel } from '../util'
 import { decode } from '../path'
 
@@ -24,7 +25,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const json = await response.json();
+        const json = JSON.parse(await response.text());
         const jobs = snakeToCamel(json);
         jobs.jobs = json['failed_jobs'].map((json: any) => {
           const job = snakeToCamel(json);

@@ -23,6 +23,7 @@
   "dependencies": {
     "es6-promise": "^4.1.1",
     "isomorphic-fetch": "^2.2.1",
+    "json-bigint": "^0.2.3",
     "loaders.css": "^0.1.2",
     "moment": "^2.18.1",
     "react": "^15.6.1",

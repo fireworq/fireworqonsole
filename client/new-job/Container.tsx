@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import { ReduxAction, ReduxState } from '../store'
 import { saveStarted, saveFinished } from '../job/module'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 import { snakeToCamel } from '../util'
 import { pathQueueJobs } from '../path'
 import { history } from '../Index'
@@ -21,7 +22,7 @@ export class ActionDispatcher {
         body: JSON.stringify(job)
       });
       if (response.ok) {
-        const job = snakeToCamel(await response.json());
+        const job = snakeToCamel(JSON.parse(await response.text()));
         queueName = job.queueName as string;
         this.dispatch(saveFinished(queueName));
         if (callback !== undefined) callback();

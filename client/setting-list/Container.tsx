@@ -5,6 +5,7 @@ import { SettingListValue, NodeSettings, nodeSettingsRetrieved, fetchStarted, fe
 import { ActionDispatcher as NodesActionDispatcher } from '../version-list/Container'
 import { ReduxAction, ReduxState } from '../store'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 
 export class ActionDispatcher {
   constructor(private dispatch: (action: ReduxAction) => void) {}
@@ -17,7 +18,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const settings = await response.json();
+        const settings = JSON.parse(await response.text());
         this.dispatch(nodeSettingsRetrieved(settings as NodeSettings));
       } else {
         throw new Error(`Request to ${path} failed with status code ${response.status}`);

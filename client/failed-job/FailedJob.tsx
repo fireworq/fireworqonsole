@@ -4,6 +4,7 @@ import Time from 'react-time'
 import { FailedJobValue } from './module'
 import { ActionDispatcher } from './Container'
 import { pathQueueFailedJobRecycler } from '../path'
+import JSON from 'json-bigint'
 
 interface Props {
   queueName?: string

@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import Time from 'react-time'
 import { JobValue } from './module'
 import { ActionDispatcher } from './Container'
+import JSON from 'json-bigint'
 
 interface Props {
   queueName?: string
