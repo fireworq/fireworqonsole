@@ -6,6 +6,7 @@ import { FailedJobListValue, FailedJob, FailedJobList as FailedJobListModel } fr
 import { ActionDispatcher } from './Container'
 import { pathQueueFailedJobRecycler } from '../path'
 import { history } from '../Index'
+import JSON from 'json-bigint'
 
 interface Props {
   queueName?: string

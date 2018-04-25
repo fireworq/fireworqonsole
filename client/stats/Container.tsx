@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import { Stats, StatsValue, statsRetrieved, fetchStarted, fetchFinished } from './module'
 import { ReduxAction, ReduxState } from '../store'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 import { snakeToCamel } from '../util'
 
 export class ActionDispatcher {
@@ -17,7 +18,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const stats = snakeToCamel(await response.json());
+        const stats = snakeToCamel(JSON.parse(await response.text()));
         this.dispatch(statsRetrieved(queueName, stats as Stats));
       } else {
         throw new Error(`Request to ${path} failed with status code ${response.status}`);

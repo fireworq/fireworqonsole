@@ -5,6 +5,7 @@ import { RoutingState, RoutingList, routingListRetrieved, listFetchStarted, list
 import { ActionDispatcher as RoutingActionDispatcher } from '../routing/Container'
 import { ReduxAction, ReduxState } from '../store'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 import { snakeToCamel } from '../util'
 import { history } from '../Index'
 
@@ -19,7 +20,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const routings = snakeToCamel(await response.json());
+        const routings = snakeToCamel(JSON.parse(await response.text()));
 
         this.dispatch(routingListRetrieved(routings.reduce((r: any, routing: any) => {
           r[routing.jobCategory] = routing;

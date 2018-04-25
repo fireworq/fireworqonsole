@@ -7,6 +7,7 @@ import { ActionDispatcher as RoutingListActionDispatcher } from '../routing-list
 import { ActionDispatcher as NodesActionDispatcher } from '../version-list/Container'
 import { ReduxAction, ReduxState } from '../store'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 import { snakeToCamel } from '../util'
 import { history } from '../Index'
 
@@ -21,7 +22,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const queues = snakeToCamel(await response.json());
+        const queues = snakeToCamel(JSON.parse(await response.text()));
 
         this.dispatch(queueListRetrieved(queues.reduce((r: any, q: any) => {
           r[q.name] = q;
@@ -44,7 +45,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const stats = snakeToCamel(await response.json());
+        const stats = snakeToCamel(JSON.parse(await response.text()));
         this.dispatch(statsListRetrieved(stats as StatsList));
       } else {
         throw new Error(`Request to ${path} failed with status code ${response.status}`);

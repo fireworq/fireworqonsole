@@ -5,6 +5,7 @@ import Time from 'react-time'
 import { pathQueueJob } from '../path'
 import { JobListValue, Job, JobList as JobListModel } from '../job/module'
 import { ActionDispatcher } from './Container'
+import JSON from 'json-bigint'
 
 interface Props {
   queueName?: string

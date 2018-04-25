@@ -5,6 +5,7 @@ import { ReduxAction, ReduxState } from '../store'
 import { JobValue, Job, jobRetrieved, fetchStarted, fetchFinished } from './module'
 import { ActionDispatcher as JobListActionDispatcher } from '../job-list/Container'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 import { snakeToCamel } from '../util'
 import { decode, pathQueueJobs } from '../path'
 import { history } from '../Index'
@@ -20,7 +21,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const json = await response.json();
+        const json = JSON.parse(await response.text());
         const job = snakeToCamel(json);
         job.payload = json.payload;
         this.dispatch(jobRetrieved(queueName, job as Job));

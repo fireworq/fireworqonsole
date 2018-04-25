@@ -5,6 +5,7 @@ import { Routing, RoutingValue, routingRetrieved, fetchStarted, fetchFinished, s
 import { ActionDispatcher as QueueListActionDispatcher } from '../queue-list/Container'
 import { ReduxAction, ReduxState } from '../store'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 import { snakeToCamel } from '../util'
 import { decode } from '../path'
 import { history } from '../Index'
@@ -20,7 +21,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const routing = snakeToCamel(await response.json());
+        const routing = snakeToCamel(JSON.parse(await response.text()));
 
         this.dispatch(routingRetrieved(routing as Routing));
       } else {

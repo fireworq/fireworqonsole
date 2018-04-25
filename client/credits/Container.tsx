@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import { CreditsState, PackageInfo, creditsRetrieved, fetchStarted, fetchFinished } from './/module'
 import { ReduxAction, ReduxState } from '../store'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 
 export class ActionDispatcher {
   constructor(private dispatch: (action: ReduxAction) => void) {}
@@ -16,7 +17,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const packages = await response.json();
+        const packages = JSON.parse(await response.text());
         this.dispatch(creditsRetrieved(packages as PackageInfo[]));
       } else {
         throw new Error(`Request to ${path} failed with status code ${response.status}`);

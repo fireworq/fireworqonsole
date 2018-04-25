@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import { VersionState, NodeVersion, consoleVersionRetrieved, nodeVersionsRetrieved, fetchStarted, fetchFinished } from '../version/module'
 import { ReduxAction, ReduxState } from '../store'
 import { RouteComponentProps } from 'react-router'
+import JSON from 'json-bigint'
 
 export class ActionDispatcher {
   constructor(private dispatch: (action: ReduxAction) => void) {}
@@ -36,7 +37,7 @@ export class ActionDispatcher {
         method: 'GET'
       });
       if (response.ok) {
-        const versions = await response.json();
+        const versions = JSON.parse(await response.text());
         this.dispatch(nodeVersionsRetrieved(versions as NodeVersion[]));
       } else {
         throw new Error(`Request to ${path} failed with status code ${response.status}`);
