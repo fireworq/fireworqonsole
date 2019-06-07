@@ -10,15 +10,11 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js']
   },
 
+  optimization: {
+    minimize: true
+  },
+
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: require('uglify-save-license')
-      }
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
