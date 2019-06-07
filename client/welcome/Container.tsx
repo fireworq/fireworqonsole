@@ -3,7 +3,7 @@ import { connect, MapStateToPropsParam } from 'react-redux'
 import { ReduxState } from '../store'
 import { RouteComponentProps } from 'react-router'
 
-const mapStateToProps: MapStateToPropsParam<{value: WelcomeValue}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: WelcomeValue}, any, ReduxState> =
   (state: ReduxState, ownProps: RouteComponentProps<{params: string | undefined}>) => {
     return { value: {
       nodes: state.version.nodeVersions

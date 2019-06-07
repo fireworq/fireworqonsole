@@ -82,7 +82,7 @@ interface Props extends RouteComponentProps<{queueName?: string}> {
   queueName?: string
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: QueueValue}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: QueueValue}, any, ReduxState> =
   (state: ReduxState, props: Props) => {
     const queueName = props.queueName || decode(props.match.params.queueName);
     if (queueName === undefined)

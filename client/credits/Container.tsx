@@ -30,7 +30,7 @@ export class ActionDispatcher {
   }
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: CreditsState}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: CreditsState}, any, ReduxState> =
   (state: ReduxState, ownProps: RouteComponentProps<{params: string | undefined}>) => {
     return { value: state.credits };
   };

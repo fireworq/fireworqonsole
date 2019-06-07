@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import * as moment from 'moment';
-import Time from 'react-time'
+import Moment from 'react-moment'
 import { JobValue } from './module'
 import { ActionDispatcher } from './Container'
 import JSON from 'json-bigint'
@@ -61,10 +61,10 @@ export class Job extends React.Component<Props, {}> {
           <dd>{job.status}</dd>
 
           <dt>Claimed at</dt>
-          <dd><Time value={job.createdAt} format="YYYY-MM-DD HH:mm:ss" /></dd>
+          <dd><Moment date={job.createdAt} format="YYYY-MM-DD HH:mm:ss" /></dd>
 
           <dt>Scheduled at</dt>
-          <dd><Time value={job.nextTry} format="YYYY-MM-DD HH:mm:ss" /></dd>
+          <dd><Moment date={job.nextTry} format="YYYY-MM-DD HH:mm:ss" /></dd>
 
           <dt>Elapsed</dt>
           <dd className={'elapsed' + (elapsed > ElapsedTooLong ? ' long' : '')}>{elapsed > 0 ? moment.duration(elapsed).humanize() : 0}</dd>

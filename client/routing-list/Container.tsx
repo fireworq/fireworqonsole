@@ -45,7 +45,7 @@ export class ActionDispatcher {
   }
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: RoutingState}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: RoutingState}, any, ReduxState> =
   (state: ReduxState, props: RouteComponentProps<{params?: string}>) => {
     return { value: state.routing };
   };

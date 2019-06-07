@@ -35,7 +35,7 @@ export class ActionDispatcher {
   }
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: SettingListValue}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: SettingListValue}, any, ReduxState> =
   (state: ReduxState, ownProps: RouteComponentProps<{params: string | undefined}>) => {
     return { value: {
       ...state.setting,

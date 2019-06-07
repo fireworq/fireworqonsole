@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import * as moment from 'moment';
-import Time from 'react-time'
+import Moment from 'react-moment'
 import { pathQueueJob } from '../path'
 import { JobListValue, Job, JobList as JobListModel } from '../job/module'
 import { ActionDispatcher } from './Container'
@@ -82,11 +82,11 @@ export class JobList extends React.Component<Props, {}> {
           <dl>
             <dt>Claimed</dt>
             <dd className="claimed">
-              <Time value={job.createdAt} format="YYYY-MM-DD HH:mm:ss" />
+              <Moment date={job.createdAt} format="YYYY-MM-DD HH:mm:ss" />
             </dd>
             <dt>Scheduled</dt>
             <dd className="scheduled">
-              <Time value={job.nextTry} format="YYYY-MM-DD HH:mm:ss" />
+              <Moment date={job.nextTry} format="YYYY-MM-DD HH:mm:ss" />
             </dd>
             <dt>Elapsed</dt>
             <dd className={'elapsed' + (elapsed > ElapsedTooLong ? ' long' : '')}>{elapsed > 0 ? moment.duration(elapsed).humanize() : 0}</dd>

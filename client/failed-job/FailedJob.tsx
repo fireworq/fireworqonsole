@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import Time from 'react-time'
+import Moment from 'react-moment'
 import { FailedJobValue } from './module'
 import { ActionDispatcher } from './Container'
 import { pathQueueFailedJobRecycler } from '../path'
@@ -58,10 +58,10 @@ export class FailedJob extends React.Component<Props, {}> {
           <dd>{job.status}</dd>
 
           <dt>Claimed at</dt>
-          <dd><Time value={job.createdAt} format="YYYY-MM-DD HH:mm:ss" /></dd>
+          <dd><Moment date={job.createdAt} format="YYYY-MM-DD HH:mm:ss" /></dd>
 
           <dt>Failed at</dt>
-          <dd><Time value={job.failedAt} format="YYYY-MM-DD HH:mm:ss" /></dd>
+          <dd><Moment date={job.failedAt} format="YYYY-MM-DD HH:mm:ss" /></dd>
 
           <dt>Tried</dt>
           <dd>{job.failCount}</dd>
