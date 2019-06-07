@@ -41,12 +41,12 @@ export class ActionDispatcher {
   }
 }
 
-interface Props extends RouteComponentProps<{queueName?: string, id?: number}> {
+interface Props extends RouteComponentProps<{queueName?: string, id?: string}> {
   queueName?: string
-  id?: number
+  id?: string
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: FailedJobValue}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: FailedJobValue}, any, ReduxState> =
   (state: ReduxState, props: Props) => {
     const queueName = props.queueName || decode(props.match.params.queueName);
     if (queueName === undefined)

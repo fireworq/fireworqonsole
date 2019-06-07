@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import Time from 'react-time'
+import Moment from 'react-moment'
 import { pathQueueFailedJob } from '../path'
 import { FailedJobListValue, FailedJob, FailedJobList as FailedJobListModel } from '../failed-job/module'
 import { ActionDispatcher } from './Container'
@@ -55,11 +55,11 @@ export class FailedJobList extends React.Component<Props, {}> {
           <dl>
             <dt>Claimed</dt>
             <dd className="claimed">
-              <Time value={job.createdAt} format="YYYY-MM-DD HH:mm:ss" />
+              <Moment date={job.createdAt} format="YYYY-MM-DD HH:mm:ss" />
             </dd>
             <dt>Failed</dt>
             <dd className="failed">
-              <Time value={job.failedAt} format="YYYY-MM-DD HH:mm:ss" />
+              <Moment date={job.failedAt} format="YYYY-MM-DD HH:mm:ss" />
             </dd>
             <dt>Tried</dt>
             <dd className="tried">{job.failCount}</dd>

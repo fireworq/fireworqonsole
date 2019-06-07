@@ -37,7 +37,7 @@ export class ActionDispatcher {
   }
 }
 
-const mapStateToProps: MapStateToPropsParam<{savingCount: number}, any> =
+const mapStateToProps: MapStateToPropsParam<{savingCount: number}, any, ReduxState> =
   (state: ReduxState, ownProps: RouteComponentProps<{params: string | undefined}>) => {
     return { savingCount: state.job.savingCount };
   };

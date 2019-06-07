@@ -40,7 +40,7 @@ interface Props extends RouteComponentProps<{params?: string}> {
   queueName?: string
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: NodeValue}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: NodeValue}, any, ReduxState> =
   (state: ReduxState, props: Props) => {
     const ipToNode = state.version.ipToNode;
     const nodesLoaded = state.version.nodesLoaded || state.version.loadingCount > 0;

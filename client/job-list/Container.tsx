@@ -64,7 +64,7 @@ interface Props extends RouteComponentProps<{queueName?: string}> {
   queueName?: string
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: JobListValue}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: JobListValue}, any, ReduxState> =
   (state: ReduxState, props: Props) => {
     const queueName = props.queueName || decode(props.match.params.queueName);
     if (queueName === undefined)

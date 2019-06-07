@@ -13,7 +13,7 @@ export class ActionDispatcher {
   }
 }
 
-const mapStateToProps: MapStateToPropsParam<{active: boolean}, any> =
+const mapStateToProps: MapStateToPropsParam<{active: boolean}, any, ReduxState> =
   (state: ReduxState, props: RouteComponentProps<{params?: string}>) => {
     return {active: state.autoReload.active};
   };

@@ -82,7 +82,7 @@ export class ActionDispatcher {
   }
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: VersionState}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: VersionState}, any, ReduxState> =
   (state: ReduxState, ownProps: RouteComponentProps<{params: string | undefined}>) => {
     return { value: state.version };
   };

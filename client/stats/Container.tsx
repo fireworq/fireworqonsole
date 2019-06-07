@@ -35,7 +35,7 @@ interface Props extends RouteComponentProps<{params?: string}> {
   queueName?: string
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: StatsValue, autoReload?: boolean}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: StatsValue, autoReload?: boolean}, any, ReduxState> =
   (state: ReduxState, props: Props) => {
     if (props.queueName === undefined)
       return { value: { loadingCount: 0 } };

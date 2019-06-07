@@ -81,7 +81,7 @@ interface Props extends RouteComponentProps<{jobCategory?: string}> {
   jobCategory?: string
 }
 
-const mapStateToProps: MapStateToPropsParam<{value: RoutingValue}, any> =
+const mapStateToProps: MapStateToPropsParam<{value: RoutingValue}, any, ReduxState> =
   (state: ReduxState, props: Props) => {
     const jobCategory = props.jobCategory || decode(props.match.params.jobCategory);
     const queueNames = Object.keys(state.queue.queues || {});
