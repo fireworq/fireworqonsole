@@ -12,7 +12,7 @@ services:
   - docker
 
 script:
-  - true
+  - script/docker/build
 
 after_script:
   - script/ci/genauthors
