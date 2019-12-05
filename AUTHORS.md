@@ -8,7 +8,8 @@ This is the official list of Fireworqonsole authors for copyright purposes.
 
 |Name |E-mail  |GitHub|Commits |
 |:----|:-------|:-----|-------:|
-|INA Lintaro|<tarao.gnn@gmail.com>|[@tarao](https://github.com/tarao)|163|
+|INA Lintaro|<tarao.gnn@gmail.com>|[@tarao](https://github.com/tarao)|164|
+|Renovate Bot|<bot@renovateapp.com>|[@renovate-bot](https://github.com/renovate-bot)|1|
 |MURATA Satoshi|<rw.satoshi.murata@gmail.com>||1|
 |yigarashi|<yigarashi@hatena.ne.jp>||1|
 
