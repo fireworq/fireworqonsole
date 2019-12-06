@@ -31,6 +31,7 @@ var (
 	bots = map[string]bool{
 		"fireworq.github@gmail.com": true,
 		"bot@renovateapp.com":       true,
+		"support@github.com":        true,
 	}
 
 	// These are commits before the OSS release.
