@@ -1,5 +1,4 @@
 import { Action } from 'redux'
-import { Queue } from './module'
 import { Stats, StatsList } from '../stats/module'
 
 enum ActionNames {
