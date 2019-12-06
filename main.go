@@ -19,10 +19,10 @@ import (
 
 	"golang.org/x/net/proxy"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	serverstarter "github.com/lestrrat-go/server-starter/listener"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/fireworq/fireworqonsole/assets"
 )
