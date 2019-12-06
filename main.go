@@ -22,7 +22,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	serverstarter "github.com/lestrrat/go-server-starter/listener"
+	serverstarter "github.com/lestrrat-go/server-starter/listener"
 
 	"github.com/fireworq/fireworqonsole/assets"
 )
