@@ -15,8 +15,8 @@ import (
 
 	"golang.org/x/net/proxy"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
 )
 
 type upstream struct {
