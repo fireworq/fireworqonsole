@@ -7,6 +7,7 @@ PRERELEASE=SNAPSHOT
 BUILD=$$(git describe --always)
 NODE=http://127.0.0.1:8080
 BIND=0.0.0.0:8888
+export GO111MODULE=on
 
 all: clean build
 
@@ -24,8 +25,7 @@ run: build
 	npm run dev & ./${BIN} --bind=${BIND} --node=${NODE} --debug & wait
 
 deps:
-	GOOS= GOARCH= glide install
-	GOOS= GOARCH= ${GO} get github.com/jessevdk/go-assets-builder
+	GO111MODULE=off GOOS= GOARCH= ${GO} get github.com/jessevdk/go-assets-builder
 
 npmbuild:
 	npm install
@@ -45,7 +45,7 @@ generate: deps
 clean:
 	rm -f **/assets.go CREDITS.go.json CREDITS.npm.json
 	rm -f $(BIN)
-	${GO} clean
+	${GO} clean || true
 
 .PHONY: all build release run deps npmbuild credits generate clean
 

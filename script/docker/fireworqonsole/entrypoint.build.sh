@@ -23,4 +23,6 @@ sync
 
 gosu docker make clean
 gosu docker make release PRERELEASE=''
+
+export GO111MODULE=on
 GOOS= GOARCH= gosu docker go run *.go --credits > CREDITS
