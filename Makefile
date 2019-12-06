@@ -34,7 +34,8 @@ npmbuild:
 
 credits:
 	GOOS= GOARCH= ${GO} run script/genauthors/genauthors.go > AUTHORS
-	script/credits-go > CREDITS.go.json
+	GO111MODULE=off GOOS= GOARCH= ${GO} get github.com/Songmu/gocredits/cmd/gocredits
+	gocredits -json | jq -r '.Licenses|map({"package":.Name,"url":.URL,"license":.Content})' > CREDITS.go.json
 	script/credits-npm > CREDITS.npm.json
 
 generate: deps
