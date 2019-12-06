@@ -226,7 +226,8 @@ dl.versions > dt.version.node:hover:before {
   margin-left: -1.3em;
   font-size: 150%;
   font-weight: bold;
-  color: #ffeeee;
+  color: transparent;
+  text-shadow: 0 0 0 #ffeeee;
   text-align: center;
   background-color: #dd8888;
   border-radius: 15px;
@@ -389,7 +390,8 @@ dl.settings .setting-diff .setting-value {
   height: 30px;
   font-size: 110%;
   font-weight: bold;
-  color: #ffeeee;
+  color: transparent;
+  text-shadow: 0 0 0 #ffeeee;
   text-align: center;
   background-color: #dd8888;
   border-radius: 15px;
