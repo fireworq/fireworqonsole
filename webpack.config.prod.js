@@ -1,9 +1,12 @@
 const webpack = require('webpack')
+const path = require('path');
 
 module.exports = {
+  mode: 'production',
   entry: './client/Index.tsx',
   output: {
-    filename: './assets/js/bundle.js'
+    path: path.resolve(__dirname, 'assets/js'),
+    filename: 'bundle.js'
   },
 
   resolve: {
