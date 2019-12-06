@@ -19,7 +19,7 @@
     "ts-loader": "6.2.1",
     "typescript": "3.5.1",
     "uglify-save-license": "0.4.1",
-    "webpack": "4.33.0",
+    "webpack": "4.41.2",
     "webpack-cli": "3.3.2"
   },
   "dependencies": {
