@@ -223,8 +223,9 @@ dl.versions > dt.version.node:hover:before {
   width: 30px;
   height: 30px;
   margin-top: -0.2em;
-  margin-left: -1.3em;
-  font-size: 150%;
+  margin-left: -32px;
+  padding-top: 0.2em;
+  font-size: 100%;
   font-weight: bold;
   color: transparent;
   text-shadow: 0 0 0 #ffeeee;
@@ -232,6 +233,7 @@ dl.versions > dt.version.node:hover:before {
   background-color: #dd8888;
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+  box-sizing: border-box;
 }
 
 
@@ -368,49 +370,73 @@ dl.settings .setting-diff .setting-value {
 
 /* Actions */
 
-.actions .edit:before {
-  content: "✎";
+.actions .edit {
+  position: relative;
   display: inline-block;
   width: 30px;
   height: 30px;
   margin-right: 0.5em;
-  font-size: 110%;
-  font-weight: bold;
-  color: #eeffee;
-  text-align: center;
   background-color: #55dd88;
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
 
-.actions .delete:before {
-  content: "🗑";
+.actions .edit:after {
+  position: absolute;
+  content: "✎";
   display: inline-block;
   width: 30px;
   height: 30px;
   font-size: 110%;
   font-weight: bold;
-  color: transparent;
-  text-shadow: 0 0 0 #ffeeee;
+  color: #eeffee;
   text-align: center;
+}
+
+.actions .delete {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
   background-color: #dd8888;
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
 
-.actions .recycle:before {
-  content: "⟳";
+.actions .delete:after {
+  position: absolute;
+  content: "🗑";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  font-size: 100%;
+  font-weight: bold;
+  color: transparent;
+  text-shadow: 0 0 0 #ffeeee;
+  text-align: center;
+}
+
+.actions .recycle {
+  position: relative;
   display: inline-block;
   width: 30px;
   height: 30px;
   margin-right: 0.5em;
+  background-color: #55dd88;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+}
+
+.actions .recycle:after {
+  position: absolute;
+  content: "⟳";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
   font-size: 110%;
   font-weight: bold;
   color: #eeffee;
   text-align: center;
-  background-color: #55dd88;
-  border-radius: 15px;
-  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
 
 /* QueueList */
@@ -1410,9 +1436,10 @@ dl.routing dd.job-category:hover:before {
   height: 30px;
   margin-top: -0.2em;
   margin-left: -1.5em;
-  font-size: 110%;
+  font-size: 100%;
   font-weight: bold;
-  color: #ffeeee;
+  color: transparent;
+  text-shadow: 0 0 0 #ffeeee;
   text-align: center;
   background-color: #dd8888;
   border-radius: 15px;
