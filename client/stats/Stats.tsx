@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { pathQueueJobs, pathQueueFailures } from '../path'
@@ -12,6 +13,8 @@ interface Props {
   actions?: ActionDispatcher
   autoReload?: boolean
 }
+
+const DelayTooLong = 1000 * 60 * 30; // 30 minutes
 
 export class Stats extends React.Component<Props, {}> {
   reloadingTimer: number|undefined
@@ -80,6 +83,8 @@ export class Stats extends React.Component<Props, {}> {
     const grabbedPerSecond = stats.popsPerSecond || 0;
     const elapsed = Math.round(completed > 0 ? stats.totalElapsed / completed : 0);
 
+    const delay = (stats.delay || 0) * 1000;
+
     const chartWidth = Math.min(pushed, maxChartWidth);
     const grabbedPercentage = (pushed > 0 ? grabbed / pushed : 0) * 100;
     const completedPercentage = (grabbed > 0 ? completed / grabbed : 0) * 100;
@@ -87,6 +92,11 @@ export class Stats extends React.Component<Props, {}> {
     const failedPercentage = ((ok + failed) > 0 ? failed / (ok + failed) : 0) * 100;
     return (
       <div>
+        <dl className="delay">
+          <dt>Delay</dt>
+          <dd className={delay > DelayTooLong ? ' long' : ''}>{moment.duration(delay).humanize()}</dd>
+        </dl>
+
         <div className="velocity">
           <div className="per-second" title="pushed jobs">{pushedPerSecond} /s</div>
           <div className="per-second" title="grabbed jobs">{grabbedPerSecond} /s</div>

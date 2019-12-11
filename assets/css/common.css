@@ -760,9 +760,29 @@ dl.queue dd.config-value:hover:before,
   flex-wrap: nowrap;
 }
 
+.stats.chart dl.delay {
+  min-width: 9em;
+  margin-right: 1em;
+}
+
+.stats.chart dl.delay dt {
+  font-familiy: sans-serif;
+  font-size: 128%;
+  color: #555555;
+}
+
+.stats.chart dl.delay dd {
+  padding: 0;
+  margin: 0;
+}
+
+.stats.chart dl.delay dd.long {
+  color: #aa4499;
+}
+
 .stats.chart .velocity {
   margin-right: 1em;
-  min-width: 7em;
+  min-width: 8em;
 }
 
 .stats.chart .velocity > * {
