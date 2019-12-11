@@ -67,6 +67,7 @@ export interface Stats {
   popsPerSecond: number
   totalWorkers: number
   idleWorkers: number
+  delay: number
 };
 
 export interface StatsState {

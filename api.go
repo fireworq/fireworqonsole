@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"net"
@@ -12,6 +13,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"golang.org/x/net/proxy"
 
@@ -36,13 +38,17 @@ func NewUpstream(prefix string, nodes []url.URL, dialer proxy.Dialer) *upstream 
 	}
 }
 
+func (u *upstream) pickNode() url.URL {
+	return u.nodes[rand.Intn(len(u.nodes))]
+}
+
 func (u *upstream) ServeReverseProxy(w http.ResponseWriter, req *http.Request) {
 	if len(u.nodes) <= 0 {
 		writeError(w, http.StatusBadGateway)
 		return
 	}
 
-	node := u.nodes[rand.Intn(len(u.nodes))]
+	node := u.pickNode()
 	director := func(req *http.Request) {
 		req.URL.Scheme = node.Scheme
 		req.URL.Host = node.Host
@@ -220,6 +226,20 @@ func (u *upstream) ServeQueueListStats(w http.ResponseWriter, req *http.Request)
 			continue
 		}
 
+		var wg sync.WaitGroup
+		var mu sync.Mutex
+		for q, s := range stats {
+			wg.Add(1)
+			go func(q string, s map[string]int64) {
+				defer wg.Done()
+				delay := u.getDelay(q)
+				mu.Lock()
+				s["delay"] = int64(delay.Seconds())
+				mu.Unlock()
+			}(q, s)
+		}
+		wg.Wait()
+
 		for q, s := range stats {
 			if _, ok := result[q]; !ok {
 				result[q] = make(map[string]int64)
@@ -242,17 +262,35 @@ func (u *upstream) ServeQueueStats(w http.ResponseWriter, req *http.Request) {
 	name := vars["queue"]
 
 	result := make(map[string]int64)
-	resps := u.getFromNodes("/queue/"+url.QueryEscape(name)+"/stats", true)
-	for _, resp := range resps {
-		stats := make(map[string]int64)
-		decoder := json.NewDecoder(resp.Body)
-		err := decoder.Decode(&stats)
-		resp.Body.Close()
-		if err != nil {
-			continue
+
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+
+		resps := u.getFromNodes("/queue/"+url.QueryEscape(name)+"/stats", true)
+		for _, resp := range resps {
+			stats := make(map[string]int64)
+			decoder := json.NewDecoder(resp.Body)
+			err := decoder.Decode(&stats)
+			resp.Body.Close()
+			if err != nil {
+				continue
+			}
+			mergeStats(result, stats)
 		}
-		mergeStats(result, stats)
-	}
+	}()
+
+	var delay time.Duration
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		delay = u.getDelay(name)
+	}()
+
+	wg.Wait()
+	result["delay"] = int64(delay.Seconds())
 
 	j, err := json.Marshal(result)
 	if err != nil {
@@ -267,6 +305,7 @@ func (u *upstream) getFromNodes(path string, ignoreError bool) []*http.Response 
 	resps := make([]*http.Response, 0, len(u.nodes))
 
 	var wg sync.WaitGroup
+	var mu sync.Mutex
 	for _, origin := range u.nodes {
 		wg.Add(1)
 		go func(origin url.URL) {
@@ -274,14 +313,59 @@ func (u *upstream) getFromNodes(path string, ignoreError bool) []*http.Response 
 			url := origin
 			url.Path = path
 			resp, err := http.Get(url.String())
-			if err == nil && (resp.StatusCode < 300 || !ignoreError) {
-				resps = append(resps, resp)
+			if err == nil {
+				if resp.StatusCode < 300 || !ignoreError {
+					mu.Lock()
+					resps = append(resps, resp)
+					mu.Unlock()
+				} else {
+					resp.Body.Close()
+				}
 			}
 		}(origin)
 	}
 	wg.Wait()
 
 	return resps
+}
+
+func (u *upstream) getFromRandomNode(path string) *http.Response {
+	origin := u.pickNode()
+	resp, err := http.Get(origin.String() + path)
+	if err == nil {
+		if resp.StatusCode < 300 {
+			return resp
+		}
+		resp.Body.Close()
+	}
+	return nil
+}
+
+func (u *upstream) getJob(queueName string, list string) *InspectedJob {
+	resp := u.getFromRandomNode(fmt.Sprintf("/queue/%s/%s?order=asc&limit=1", url.QueryEscape(queueName), list))
+	if resp == nil {
+		return nil
+	}
+	defer resp.Body.Close()
+
+	var jobs *InspectedJobs
+	decoder := json.NewDecoder(resp.Body)
+	err := decoder.Decode(&jobs)
+	if err == nil && len(jobs.Jobs) > 0 {
+		return &jobs.Jobs[0]
+	}
+	return nil
+}
+
+func (u *upstream) getDelay(queueName string) time.Duration {
+	job := u.getJob(queueName, "waiting")
+	if job == nil {
+		job = u.getJob(queueName, "grabbed")
+	}
+	if job != nil {
+		return time.Since(job.NextTry)
+	}
+	return time.Duration(0)
 }
 
 func writeJson(w http.ResponseWriter, json []byte) {
@@ -309,4 +393,12 @@ func mergeStats(stats1 map[string]int64, stats2 map[string]int64) {
 	for k, v := range stats2 {
 		stats1[k] += v
 	}
+}
+
+type InspectedJob struct {
+	NextTry time.Time `json:"next_try"`
+}
+
+type InspectedJobs struct {
+	Jobs []InspectedJob `json:"jobs"`
 }
