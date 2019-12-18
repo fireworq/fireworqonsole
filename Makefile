@@ -1,5 +1,4 @@
 BIN=fireworqonsole
-SHELL=/bin/bash -O globstar
 BUILD_OUTPUT=.
 TEST_OUTPUT=.
 GO=go
@@ -44,7 +43,7 @@ generate: deps
 	GOOS= GOARCH= ${GO} generate -x ./...
 
 clean:
-	rm -f **/assets.go CREDITS.go.json CREDITS.npm.json
+	rm -f assets/assets.go CREDITS.go.json CREDITS.npm.json
 	rm -f $(BIN)
 	${GO} clean || true
 
