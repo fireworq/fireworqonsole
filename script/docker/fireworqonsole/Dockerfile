@@ -13,4 +13,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl jq \
  && go get github.com/tianon/gosu \
  && mkdir -p /usr/local /xbuild \
  && git clone https://github.com/tagomoris/xbuild.git /usr/local/xbuild \
- && /usr/local/xbuild/node-install ${NODE_VERSION} /xbuild/node-${NODE_VERSION}
+ && /usr/local/xbuild/node-install v${NODE_VERSION} /xbuild/node-${NODE_VERSION}
