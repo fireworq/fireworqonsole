@@ -9,5 +9,5 @@ require (
 	github.com/lestrrat-go/server-starter v0.0.0-20200204225643-53093363107d
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0 // indirect
-	golang.org/x/net v0.0.0-20200226051749-491c5fce7268
+	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
 )
