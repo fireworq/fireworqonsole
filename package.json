@@ -30,7 +30,7 @@
     "moment": "2.24.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
-    "react-redux": "7.1.3",
+    "react-redux": "7.2.0",
     "react-router": "5.1.2",
     "react-router-dom": "5.1.2",
     "react-moment": "0.9.7",
