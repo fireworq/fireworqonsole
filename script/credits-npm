@@ -1,7 +1,5 @@
 #!/bin/bash
 
-shopt -s globstar
-
 DIR=$(cd $(dirname "$0"); pwd)
 ROOT=$(cd "$DIR/.."; pwd)
 cd "$ROOT"
