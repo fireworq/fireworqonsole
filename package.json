@@ -16,7 +16,7 @@
     "@types/react-redux": "7.1.7",
     "@types/react-router": "5.1.7",
     "@types/react-router-dom": "5.1.5",
-    "ts-loader": "7.0.1",
+    "ts-loader": "7.0.2",
     "typescript": "3.8.3",
     "uglify-save-license": "0.4.1",
     "webpack": "4.43.0",
