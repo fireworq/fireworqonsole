@@ -1,5 +1,13 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base"
+  ],
+  "postUpdateOptions": ["gomodTidy"],
+  "packageRules": [
+    {
+      "updateTypes": ["patch", "pin", "digest"],
+      "automerge": true
+    }
   ]
 }
