@@ -52,6 +52,6 @@ generate: deps
 
 .PHONY: clean
 clean:
-	rm -f assets/assets.go CREDITS.go.json CREDITS.npm.json
+	rm -f assets/assets.go assets.go CREDITS.go.json CREDITS.npm.json
 	rm -f $(BIN)
 	${GO} clean || true
