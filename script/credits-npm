@@ -6,11 +6,21 @@ cd "$ROOT"
 
 json_license() {
     dir="$1"
-    pkg=$(basename "$dir")
+    pkg="${dir#node_modules/}"
     license=$(cat "$dir"/LICENSE* "$dir"/license* 2>/dev/null)
-    [ -z "$license" ] && [ -r "$dir"/package.json ] && {
-        license=$(cat "$dir"/package.json | jq -r '.license')
-    }
+    if [[ -z "$license" ]]; then
+        if [[ -r "$dir"/package.json ]]; then
+            license=$(cat "$dir"/package.json | jq -r '.license')
+        else
+            if [[ "$pkg" = "@"* ]]; then
+                for d in $(ls -d "$dir"/*); do
+                    json_license "$d"
+                done
+            fi
+            return
+        fi
+    fi
+    echo -n "$sep"; sep=','
     jq -n \
        --arg pkg "$pkg" \
        --arg url "https://www.npmjs.com/package/$pkg" \
@@ -20,7 +30,6 @@ json_license() {
 
 echo -n '['; sep=''
 for dir in $(ls -d node_modules/*); do
-    echo -n "$sep"; sep=','
     json_license "$dir"
 done
 echo ']'
