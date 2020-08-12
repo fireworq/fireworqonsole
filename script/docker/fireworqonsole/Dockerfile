@@ -3,7 +3,7 @@
 # $ docker build -t fireworqonsole .
 # $ docker run --rm fireworqonsole
 
-FROM golang:1.14
+FROM golang:1.15
 
 ARG NODE_VERSION
 ENV PATH /xbuild/node-${NODE_VERSION}/bin:$PATH
