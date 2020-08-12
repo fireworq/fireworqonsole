@@ -1,6 +1,6 @@
 module github.com/fireworq/fireworqonsole
 
-go 1.14
+go 1.15
 
 require (
 	github.com/gorilla/handlers v1.4.2
