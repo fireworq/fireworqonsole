@@ -1,0 +1,32 @@
+name: Release Docker Image
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  release:
+    runs-on: ubuntu-18.04
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set variables
+      id: variables
+      run: |
+        git_tag_name="${{ github.event.release.tag_name }}"
+        git_tag_name="${git_tag_name#v}"
+        echo "::set-output name=release_tag_patch::${git_tag_name}"
+        echo "::set-output name=release_tag_minor::${git_tag_name%.*}"
+        echo "::set-output name=node_version::$(cat .node-version)"
+
+    - name: Build and Release
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        repository: fireworq/fireworqonsole
+        tags: latest, ${{ steps.variables.outputs.release_tag_patch }}, ${{ steps.variables.outputs.release_tag_minor }}
+        build_args: NODE_VERSION=${{ steps.variables.node_version }}
