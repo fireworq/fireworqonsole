@@ -53,6 +53,12 @@ func main() {
 	flags.Var(&nodes, "node", "")
 	flags.StringVar(&bind, "bind", "127.0.0.1:8888", "")
 	flags.UintVar(&shutdownTimeout, "shutdown-timeout", 30, "")
+	flags.VisitAll(func(f *flag.Flag) {
+		env := "FIREWORQONSOLE_" + strings.ReplaceAll(strings.ToUpper(f.Name), "-", "_")
+		if s := os.Getenv(env); s != "" {
+			f.Value.Set(s)
+		}
+	})
 
 	if err := flags.Parse(os.Args[1:]); err != nil {
 		os.Exit(1)

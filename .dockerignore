@@ -1,0 +1,15 @@
+/.github/
+/dist/
+/node_modules/
+/vendoer/
+/assets/assets.go
+/assets/js/bundle.*
+
+/assets.go
+/AUTHORS
+/CREDITS
+/CREDITS.*.json
+
+/fireworqonsole
+
+mock_*.go
