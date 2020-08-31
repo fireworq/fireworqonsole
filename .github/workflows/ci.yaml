@@ -23,4 +23,4 @@ jobs:
           node_version=$(cat .node-version)
           image=$(docker build -q --force-rm --build-arg NODE_VERSION=$node_version -t fireworqonsole .)
           docker run --rm $image -v
-          docker rm -f $image
+          docker image rm -f $image
