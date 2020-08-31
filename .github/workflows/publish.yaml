@@ -1,4 +1,4 @@
-name: Release Docker Image
+name: Publish Docker Image
 
 on:
   release:
@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  release:
+  publish:
     runs-on: ubuntu-18.04
     steps:
 
