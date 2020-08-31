@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+
+  test:
+    name: Test
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # TODO: We need unit test or something
+
+      - name: Image Build Test
+        run: |
+          node_version=$(cat .node-version)
+          image=$(docker build -q --force-rm --build-arg NODE_VERSION=$node_version -t fireworqonsole .)
+          docker run --rm $image -v
+          docker rm -f $image
