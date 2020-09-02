@@ -2,7 +2,7 @@ package main
 
 const (
 	Name    = "Fireworqonsole"
-	Version = "1.1.0"
+	Version = "1.1.1"
 )
 
 var (
