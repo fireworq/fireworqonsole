@@ -7,6 +7,20 @@ A console to manage [Fireworq][] daemons on a Web UI.
 
 ## <a name="start">Getting Started</a>
 
+You can choose from two options to launch [Fireworqonsole][] as follows.
+
+### Use Docker
+
+Run the following commands and you will get the whole system working
+all at once.  Make sure you have [Docker][] installed before running
+these commands.
+
+```
+$ docker run --rm -p 8888:8888 fireworq/fireworqonsole
+```
+
+### Use binary
+
 A release build is available on [the releases page][releases].
 
 For example, the following commands download and extract the
@@ -25,7 +39,9 @@ Run `fireworqonsole` by the following command.
 $ ./fireworqonsole
 ```
 
-Then access to http://localhost:8888/ from your browser and follow the
+### After launched
+
+Access http://localhost:8888/ from your browser and follow the
 instruction to add Fireworq nodes to manage.  You can also use
 `--node` argument of the command to specify nodes if you prefer.  To
 start a console with a different port, specify `--bind` argument of
@@ -43,4 +59,5 @@ the command.
 [releases]: https://github.com/fireworq/fireworqonsole/releases
 
 [Fireworq]: https://github.com/fireworq/fireworq
+[Fireworqonsole]: https://github.com/fireworq/fireworqonsole
 [Docker]: https://www.docker.com/
