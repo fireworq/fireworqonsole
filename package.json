@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "es6-promise": "4.2.8",
-    "isomorphic-fetch": "2.2.1",
+    "isomorphic-fetch": "3.0.0",
     "json-bigint": "1.0.0",
     "loaders.css": "0.1.2",
     "moment": "2.29.0",
