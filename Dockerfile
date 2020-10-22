@@ -13,7 +13,7 @@ WORKDIR ${APP_DIR}
 COPY . .
 RUN make release PRERELEASE=
 
-FROM alpine:3.12.0
+FROM alpine:3.12.1
 ARG PORT=8888
 ENV FIREWORQONSOLE_BIND 0.0.0.0:$PORT
 ENV APP_DIR /go/src/github.com/fireworq/fireworqonsole
