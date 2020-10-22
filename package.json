@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "description": "A web console for Fireworq",
   "scripts": {
-    "dev": "webpack -w --colors --config ./webpack.config.dev.js",
-    "build": "webpack --colors --config ./webpack.config.dev.js",
-    "build:prod": "webpack --colors --config ./webpack.config.prod.js"
+    "dev": "webpack -w --color --config ./webpack.config.dev.js",
+    "build": "webpack --color --config ./webpack.config.dev.js",
+    "build:prod": "webpack --color --config ./webpack.config.prod.js"
   },
   "author": "tarao",
   "license": "MIT",
