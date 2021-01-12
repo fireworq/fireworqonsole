@@ -36,7 +36,7 @@ jobs:
           echo "::set-output name=node_version::$(cat .node-version)"
 
       - name: Build and release Docker image
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
