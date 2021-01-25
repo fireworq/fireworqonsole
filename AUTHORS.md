@@ -9,7 +9,7 @@ This is the official list of Fireworqonsole authors for copyright purposes.
 |Name |E-mail  |GitHub|Commits |
 |:----|:-------|:-----|-------:|
 |INA Lintaro|<tarao.gnn@gmail.com>|[@tarao](https://github.com/tarao)|409|
-|itchyny|<itchyny@hatena.ne.jp>||29|
+|itchyny|<itchyny@hatena.ne.jp>||31|
 |Tomohiro Nishimura|<tomohiro68@gmail.com>|[@Sixeight](https://github.com/Sixeight)|19|
 |MURATA Satoshi|<rw.satoshi.murata@gmail.com>||1|
 |yigarashi|<yigarashi@hatena.ne.jp>||1|
