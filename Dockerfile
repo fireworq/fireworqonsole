@@ -1,4 +1,4 @@
-FROM golang:1.15 as builder
+FROM golang:1.16 as builder
 ARG NODE_VERSION
 RUN : ${NODE_VERSION:?NODE_VERSION is required}
 ENV PATH /xbuild/node-${NODE_VERSION}/bin:$PATH
