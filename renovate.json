@@ -8,6 +8,11 @@
     {
       "updateTypes": ["patch", "pin", "digest"],
       "automerge": true
+    },
+    {
+      "datasources": ["go"],
+      "packageNames": ["golang.org/x/net"],
+      "extends": ["schedule:quarterly"]
     }
   ]
 }
