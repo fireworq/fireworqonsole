@@ -1,6 +1,37 @@
+:root {
+  --background-color: #ffffff;
+  --foreground-color: #000000;
+  --lighter-dim-color: #eeeeee;
+  --light-dim-color: #cccccc;
+  --dim-color: #666666;
+  --dark-dim-color: #555555;
+  --darker-dim-color: #333333;
+  --light-green-color: #cceedd;
+  --bright-green-color: #f3fff8;
+  --green-color: #55dd88;
+  --red-color: #dd8888;
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #101010;
+  --foreground-color: #f0f0f0;
+  --lighter-dim-color: #222222;
+  --light-dim-color: #333333;
+  --dim-color: #888888;
+  --dark-dim-color: #aaaaaa;
+  --darker-dim-color: #bbbbbb;
+  --light-green-color: #225533;
+  --bright-green-color: #1c221c;
+  --green-color: #227744;
+  --red-color: #774444;
+}
+}
+
 html, body {
   height: 100%;
-  background-color: white;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 }
 
 a, a:hover, a:link, a:active, a:visited {
@@ -12,8 +43,13 @@ input:placeholder-shown,
 input::-webkit-input-placeholder,
 input::-moz-placeholder,
 input::-ms-input-placeholder {
-  color: #cccccc;
+  color: var(--light-dim-color);
   opacity: 1;
+}
+
+input, textarea {
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 }
 
 body {
@@ -70,10 +106,10 @@ footer {
   clear: both;
   margin: 4em 2em 1em 2em;
   padding: 0.3em;
-  border-top: solid 1px #cceedd;
+  border-top: solid 1px var(--light-green-color);
   text-align: right;
   font-size: 130%;
-  color: #666666;
+  color: var(--dim-color);
 }
 
 footer * {
@@ -154,7 +190,7 @@ div.main {
   margin: 1em 0;
   padding: 0.3em 0.8em;
   color: #339977;
-  background-color: #cceedd;
+  background-color: var(--light-green-color);
   border-radius: 8px;
   cursor: pointer;
 }
@@ -178,7 +214,7 @@ div.main {
 .credits .package pre {
   margin-left: 2em;
   padding: 1em;
-  color: #666666;
+  color: var(--dim-color);
   background-color: #eeffee;
   border-radius: 8px;
 }
@@ -230,7 +266,7 @@ dl.versions > dt.version.node:hover:before {
   color: transparent;
   text-shadow: 0 0 0 #ffeeee;
   text-align: center;
-  background-color: #dd8888;
+  background-color: var(--red-color);
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
   box-sizing: border-box;
@@ -238,7 +274,7 @@ dl.versions > dt.version.node:hover:before {
 
 
 dl.versions > dd {
-  border-bottom: solid 1px #cceedd;
+  border-bottom: solid 1px var(--light-green-color);
   margin: 0.5em 0;
   padding-left: 16em;
 }
@@ -285,7 +321,7 @@ dl.versions > dd.invalid:before {
   padding: 0.3em 0.5em 0.2em;
   font-size: 90%;
   font-weight: bold;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   border-radius: 8px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
   color: #eeffee;
@@ -295,7 +331,7 @@ dl.versions > dd.invalid:before {
   position: absolute;
   left: -100%;
   padding: 0.4em;
-  border: solid 2px #cceedd;
+  border: solid 2px var(--light-green-color);
   border-radius: 4px;
 }
 
@@ -350,7 +386,7 @@ dl.settings > dt {
 }
 
 dl.settings > dd {
-  border-bottom: solid 1px #cceedd;
+  border-bottom: solid 1px var(--light-green-color);
   margin: 0.5em 0;
   padding-left: 16em;
 }
@@ -376,7 +412,7 @@ dl.settings .setting-diff .setting-value {
   width: 30px;
   height: 30px;
   margin-right: 0.5em;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
@@ -398,7 +434,7 @@ dl.settings .setting-diff .setting-value {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-color: #dd8888;
+  background-color: var(--red-color);
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
@@ -422,7 +458,7 @@ dl.settings .setting-diff .setting-value {
   width: 30px;
   height: 30px;
   margin-right: 0.5em;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
@@ -442,7 +478,7 @@ dl.settings .setting-diff .setting-value {
 /* QueueList */
 
 .queue-list a:hover {
-  background-color: #f3fff8;
+  background-color: var(--bright-green-color);
   border-radius: 8px;
 }
 
@@ -450,7 +486,7 @@ dl.settings .setting-diff .setting-value {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  border-bottom: solid 1px #cceedd;
+  border-bottom: solid 1px var(--light-green-color);
   padding: 0.5em 0;
 }
 
@@ -497,12 +533,12 @@ dl.settings .setting-diff .setting-value {
 }
 
 .queue-list .queue .links .jobs {
-  background-color: #55dd88;
+  background-color: var(--green-color);
 }
 
 .queue-list .queue .links .failures {
   margin-top: 0.2em;
-  background-color: #dd8888;
+  background-color: var(--red-color);
 }
 
 .queue-list .queue dl.config {
@@ -516,7 +552,7 @@ dl.settings .setting-diff .setting-value {
 }
 
 .queue-list .queue dl.config dt {
-  color: #555555;
+  color: var(--dark-dim-color);
   float: left;
   clear: both;
   width: 8em;
@@ -547,7 +583,7 @@ dl.settings .setting-diff .setting-value {
   padding: 0.3em 0.5em 0.2em;
   font-size: 90%;
   font-weight: bold;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   border-radius: 8px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
   color: #eeffee;
@@ -557,7 +593,7 @@ dl.settings .setting-diff .setting-value {
   position: absolute;
   left: -100%;
   padding: 0.4em;
-  border: solid 2px #cceedd;
+  border: solid 2px var(--light-green-color);
   border-radius: 4px;
 }
 
@@ -602,8 +638,8 @@ nav.queue-tabs {
   position: absolute;
   width: 100%;
   font-size: 100%;
-  color: #555555;
-  border-bottom: solid 1px #cceedd;
+  color: var(--dark-dim-color);
+  border-bottom: solid 1px var(--light-green-color);
 }
 
 nav.queue-tabs ul {
@@ -626,16 +662,16 @@ nav.queue-tabs ul li {
 
 nav.queue-tabs ul li.selected {
   color: #77aa99;
-  border-color: #cceedd #cceedd white #cceedd;
+  border-color: var(--light-green-color) var(--light-green-color) var(--background-color) var(--light-green-color);
 }
 
 nav.queue-tabs ul li:hover {
-  background-color: #f3fff8;
-  border-bottom-color: #cceedd;
+  background-color: var(--bright-green-color);
+  border-bottom-color: var(--light-green-color);
 }
 
 nav.queue-tabs ul li.selected:hover {
-  border-bottom-color: white;
+  border-bottom-color: var(--background-color);
 }
 
 /* Queue */
@@ -645,7 +681,7 @@ nav.queue-tabs ul li.selected:hover {
 }
 
 dl.queue > dt {
-  color: #555555;
+  color: var(--dark-dim-color);
   font-weight: bold;
 }
 
@@ -666,7 +702,7 @@ dl.queue dd.config-value .unit {
 dl.queue dd.config-value input {
   width: 5em;
   padding: 0.4em;
-  border: solid 2px #cceedd;
+  border: solid 2px var(--light-green-color);
   border-radius: 4px;
 }
 
@@ -688,7 +724,7 @@ form.queue-edit button {
   padding: 0.5em;
   border-style: none;
   border-radius: 8px;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
   color: #eeffee;
   font-size: 90%;
@@ -696,7 +732,7 @@ form.queue-edit button {
 }
 
 form.queue-edit button:hover {
-  background-color: #cceedd;
+  background-color: var(--light-green-color);
 }
 
 form.queue-edit dl.queue dd.config-value:hover:before {
@@ -716,7 +752,7 @@ dl.queue dd.config-value:hover:before,
   font-weight: bold;
   color: #eeffee;
   text-align: center;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
@@ -725,7 +761,7 @@ dl.queue dd.config-value:hover:before,
 
 .node {
   font-size: 90%;
-  color: #666666;
+  color: var(--dim-color);
 }
 
 .node .host {
@@ -768,7 +804,7 @@ dl.queue dd.config-value:hover:before,
 .stats.chart dl.delay dt {
   font-familiy: sans-serif;
   font-size: 128%;
-  color: #555555;
+  color: var(--dark-dim-color);
 }
 
 .stats.chart dl.delay dd {
@@ -786,7 +822,7 @@ dl.queue dd.config-value:hover:before,
 }
 
 .stats.chart .velocity > * {
-  color: #333333;
+  color: var(--darker-dim-color);
   height: 1.6em;
 }
 
@@ -798,15 +834,15 @@ dl.queue dd.config-value:hover:before,
 }
 
 .stats.chart .pushed {
-  color: #666666;
-  background-color: #eeeeee;
+  color: var(--dim-color);
+  background-color: var(--lighter-dim-color);
   border-top-right-radius: 6px;
   height: 4.8em;
 }
 
 .stats.chart .grabbed {
-  color: #333333;
-  background-color: #bbbbbb;
+  color: var(--darker-dim-color);
+  background-color: var(--light-dim-color);
   border-top-right-radius: 6px;
   height: 3.2em;
 }
@@ -818,7 +854,7 @@ dl.queue dd.config-value:hover:before,
 
 .stats.chart .pushed > a > .label:hover,
 .stats.chart .grabbed > a  .label:hover {
-  background-color: #f3fff8;
+  background-color: var(--bright-green-color);
   border-radius: 8px;
 }
 
@@ -874,7 +910,7 @@ dl.queue dd.config-value:hover:before,
 /* NewJob */
 
 .new-job dl > dt {
-  color: #555555;
+  color: var(--dark-dim-color);
   font-weight: bold;
 }
 
@@ -892,7 +928,7 @@ dl.queue dd.config-value:hover:before,
 .new-job dl dd textarea {
   width: 20em;
   padding: 0.4em;
-  border: solid 2px #cceedd;
+  border: solid 2px var(--light-green-color);
   border-radius: 4px;
 }
 
@@ -928,7 +964,7 @@ dl.queue dd.config-value:hover:before,
   font-size: 90%;
   content: " ";
   color: #88dd99;
-  border: 2px solid #cceedd;
+  border: 2px solid var(--light-green-color);
   border-radius: 4px;
 }
 
@@ -942,7 +978,7 @@ dl.queue dd.config-value:hover:before,
 }
 
 .new-job .options label[for="remove-log-item"] a {
-  color: #dd8888;
+  color: var(--red-color);
 }
 
 .new-job .loader {
@@ -958,7 +994,7 @@ dl.queue dd.config-value:hover:before,
   padding: 0.5em;
   border-style: none;
   border-radius: 8px;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
   color: #eeffee;
   font-size: 90%;
@@ -966,7 +1002,7 @@ dl.queue dd.config-value:hover:before,
 }
 
 .new-job button:hover {
-  background-color: #cceedd;
+  background-color: var(--light-green-color);
 }
 
 /* Job */
@@ -976,7 +1012,7 @@ dl.queue dd.config-value:hover:before,
 }
 
 .job.single dl > dt {
-  color: #555555;
+  color: var(--dark-dim-color);
   font-weight: bold;
 }
 
@@ -1005,7 +1041,7 @@ dl.queue dd.config-value:hover:before,
 .job.single dl > dd pre {
   white-space: pre-wrap;
   margin: 0;
-  background-color: #eeeeee;
+  background-color: var(--lighter-dim-color);
   padding: 1em;
   border-radius: 8px;
 }
@@ -1025,8 +1061,8 @@ dl.queue dd.config-value:hover:before,
 
 .jobs > div > .list,
 .jobs > div.none > div {
-  border-left: solid 4px #cceedd;
-  border-right: solid 4px #cceedd;
+  border-left: solid 4px var(--light-green-color);
+  border-right: solid 4px var(--light-green-color);
 }
 
 .jobs > div.none > div {
@@ -1041,7 +1077,7 @@ dl.queue dd.config-value:hover:before,
   transform: translateX(-50%) rotate(-90deg);
   font-size: 80%;
   font-weight: bold;
-  color: #666666;
+  color: var(--dim-color);
   z-index: 10;
 }
 
@@ -1060,9 +1096,9 @@ dl.queue dd.config-value:hover:before,
   margin-top: 2em;
   padding: 0.5em 1em;
   border-radius: 1em;
-  color: #cccccc;
-  background-color: #000;
-  border: 1px solid #000;
+  color: var(--light-dim-color);
+  background-color: var(--foreground-color);
+  border: 1px solid var(--foreground-color);
   transform-origin: top left;
   transform: rotate(90deg);
   min-width: 30em;
@@ -1076,7 +1112,7 @@ dl.queue dd.config-value:hover:before,
   left: -30px;
   margin-top: -15px;
   border: 15px solid transparent;
-  border-right: 15px solid #000;
+  border-right: 15px solid var(--foreground-color);
 }
 
 .jobs > div .partition .hint:hover .description {
@@ -1092,8 +1128,8 @@ dl.queue dd.config-value:hover:before,
   height: 6rem;
   padding: 2rem 0;
   box-sizing: border-box;
-  border-left: dashed 4px #cceedd;
-  border-right: dashed 4px #cceedd;
+  border-left: dashed 4px var(--light-green-color);
+  border-right: dashed 4px var(--light-green-color);
 }
 
 .jobs > div > .loader + .next {
@@ -1104,8 +1140,8 @@ dl.queue dd.config-value:hover:before,
   text-align: center;
   cursor: pointer;
   color: #ccffdd;
-  border-left: dashed 4px #cceedd;
-  border-right: dashed 4px #cceedd;
+  border-left: dashed 4px var(--light-green-color);
+  border-right: dashed 4px var(--light-green-color);
 }
 
 .jobs > div.has-next:before,
@@ -1116,7 +1152,7 @@ dl.queue dd.config-value:hover:before,
   bottom: 1.5em;
   width: 2em;
   height: 1em;
-  background-color: white;
+  background-color: var(--background-color);
   background-size: 2em 1em;
   background-repeat: no-repeat;
   background-image: url('data:image/svg+xml,<svg width="64" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 8 Q 16 0 32 8 Q 48 16 64 8 M0 24 Q 16 16 32 24 Q 48 32 64 24" stroke="#88aa99" stroke-width="1" fill="transparent"/></svg>')
@@ -1143,13 +1179,13 @@ dl.queue dd.config-value:hover:before,
 }
 
 .jobs > div > .next:hover:after {
-  background-color: #f3fff8;
+  background-color: var(--bright-green-color);
   border-radius: 8px;
 }
 
 .jobs .list {
   width: 100%;
-  color: #333333;
+  color: var(--darker-dim-color);
   font-size: 85%;
 }
 
@@ -1205,7 +1241,7 @@ dl.queue dd.config-value:hover:before,
 
 .jobs .list .job .identity .id {
   float: left;
-  color: #666666;
+  color: var(--dim-color);
 }
 
 .jobs .list .job .identity .category {
@@ -1231,7 +1267,7 @@ dl.queue dd.config-value:hover:before,
 .jobs .list .job .identity .url {
   clear: both;
   font-family: monospace;
-  color: #666666;
+  color: var(--dim-color);
 }
 
 .jobs .list .job .status {
@@ -1240,7 +1276,7 @@ dl.queue dd.config-value:hover:before,
 
 .jobs .list .job .status.claimed {
   font-style: italic;
-  color: #666666;
+  color: var(--dim-color);
 }
 
 .jobs .list .job .status.grabbed {
@@ -1340,13 +1376,13 @@ dl.queue dd.config-value:hover:before,
 /* RoutingList */
 
 .routing-list a:hover {
-  background-color: #f3fff8;
+  background-color: var(--bright-green-color);
   border-radius: 8px;
 }
 
 .routing-list .routing > * {
   text-align: left;
-  border-bottom: solid 1px #cceedd;
+  border-bottom: solid 1px var(--light-green-color);
   padding: 0.5em 0;
 }
 
@@ -1360,7 +1396,7 @@ dl.queue dd.config-value:hover:before,
 }
 
 .routing-list .routing.head {
-  color: #555555;
+  color: var(--light-dim-color);
 }
 
 .routing-list .new-routing label {
@@ -1382,7 +1418,7 @@ dl.queue dd.config-value:hover:before,
   padding: 0.3em 0.5em 0.2em;
   font-size: 90%;
   font-weight: bold;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   border-radius: 8px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
   color: #eeffee;
@@ -1392,7 +1428,7 @@ dl.queue dd.config-value:hover:before,
   position: absolute;
   left: -100%;
   padding: 0.4em;
-  border: solid 2px #cceedd;
+  border: solid 2px var(--light-green-color);
   border-radius: 4px;
 }
 
@@ -1433,7 +1469,7 @@ dl.queue dd.config-value:hover:before,
 }
 
 dl.routing > dt {
-  color: #555555;
+  color: var(--light-dim-color);
   font-weight: bold;
 }
 
@@ -1461,7 +1497,7 @@ dl.routing dd.job-category:hover:before {
   color: transparent;
   text-shadow: 0 0 0 #ffeeee;
   text-align: center;
-  background-color: #dd8888;
+  background-color: var(--red-color);
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
@@ -1473,7 +1509,7 @@ dl.routing dd.config-value {
 dl.routing dd.config-value select {
   width: 15em;
   padding: 0.4em;
-  border: solid 2px #cceedd;
+  border: solid 2px var(--light-green-color);
   border-radius: 4px;
   background-color: transparent;
 }
@@ -1496,7 +1532,7 @@ form.routing-edit button {
   padding: 0.5em;
   border-style: none;
   border-radius: 8px;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
   color: #eeffee;
   font-size: 90%;
@@ -1504,7 +1540,7 @@ form.routing-edit button {
 }
 
 form.routing-edit button:hover {
-  background-color: #cceedd;
+  background-color: var(--light-green-color);
 }
 
 form.routing-edit dl.routing dd.config-value:hover:before {
@@ -1524,7 +1560,7 @@ dl.routing dd.config-value:hover:before,
   font-weight: bold;
   color: #eeffee;
   text-align: center;
-  background-color: #55dd88;
+  background-color: var(--green-color);
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
@@ -1574,7 +1610,7 @@ dl.routing dd.config-value:hover:before,
   height: 10px;
   margin: 2px;
   border-radius: 5px;
-  background-color: white;
+  background-color: var(--background-color);
 }
 
 .auto-reload div.switch:not(.active):after {
