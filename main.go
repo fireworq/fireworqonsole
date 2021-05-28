@@ -1,13 +1,12 @@
-//go:generate go-assets-builder -p main -o assets.go LICENSE AUTHORS CREDITS.go.json CREDITS.npm.json
 package main
 
 import (
 	"context"
+	_ "embed"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
@@ -214,8 +213,14 @@ type PackageInfo struct {
 	License string `json:"license"`
 }
 
+//go:embed CREDITS.npm.json
+var creditsNpmJson []byte
+
+//go:embed CREDITS.go.json
+var creditsGoJson []byte
+
 func serveCredits(w http.ResponseWriter, req *http.Request) {
-	json := mustAsset("/CREDITS.npm.json")
+	json := creditsNpmJson
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Content-Length", strconv.Itoa(len(json)))
 	w.WriteHeader(200)
@@ -227,8 +232,8 @@ func printCredits() {
 		creditsGo  []PackageInfo
 		creditsNpm []PackageInfo
 	)
-	json.Unmarshal(mustAsset("/CREDITS.go.json"), &creditsGo)
-	json.Unmarshal(mustAsset("/CREDITS.npm.json"), &creditsNpm)
+	json.Unmarshal(creditsGoJson, &creditsGo)
+	json.Unmarshal(creditsNpmJson, &creditsNpm)
 
 	credits := append(creditsGo, creditsNpm...)
 	for _, pkg := range credits {
@@ -238,23 +243,6 @@ func printCredits() {
 		fmt.Println(pkg.License)
 		fmt.Println("================================================================")
 	}
-}
-
-func mustAsset(path string) []byte {
-	f, err := Assets.Open(path)
-	if err != nil {
-		panic(err)
-	}
-
-	buf, err := ioutil.ReadAll(f)
-	if err != nil {
-		panic(err)
-	}
-	return buf
-}
-
-func mustAssetString(path string) string {
-	return string(mustAsset(path))
 }
 
 type nodes []url.URL
@@ -275,7 +263,13 @@ func (us *nodes) Set(value string) error {
 }
 
 var (
-	licenseText = mustAssetString("/LICENSE") + `
+	//go:embed LICENSE
+	licenseTextPrefix string
+
+	//go:embed AUTHORS
+	authorsText string
+
+	licenseText = licenseTextPrefix + `
    Copyright (c) 2017 The Fireworqonsole Authors. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -290,7 +284,7 @@ var (
    See the License for the specific language governing permissions and
    limitations under the License.
 
-` + mustAssetString("/AUTHORS")
+` + authorsText
 
 	helpText = `
 Usage: fireworqonsole [options]

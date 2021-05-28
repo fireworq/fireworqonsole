@@ -53,6 +53,6 @@ generate: deps
 
 .PHONY: clean
 clean:
-	rm -f assets.go assets/css/loaders.min.css assets/js/bundle.* CREDITS.go.json CREDITS.npm.json
+	rm -f assets/css/loaders.min.css assets/js/bundle.* CREDITS.go.json CREDITS.npm.json
 	rm -f $(BIN)
 	${GO} clean || true
