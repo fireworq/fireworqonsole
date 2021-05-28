@@ -19,17 +19,13 @@ build: generate
 	${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=DEBUG" -o ${BUILD_OUTPUT}/$(BIN) .
 
 .PHONY: release
-release: npmbuild deps credits generate
+release: npmbuild credits generate
 	cp node_modules/loaders.css/loaders.min.css assets/css/loaders.min.css
 	CGO_ENABLED=0 ${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=$(PRERELEASE)" -o ${BUILD_OUTPUT}/$(BIN) .
 
 .PHONY: run
 run: build
 	npm run dev & ./${BIN} --bind=${BIND} --node=${NODE} --debug & wait
-
-.PHONY: deps
-deps:
-	GO111MODULE=off GOOS= GOARCH= ${GO} get github.com/jessevdk/go-assets-builder
 
 .PHONY: npmbuild
 npmbuild:
@@ -46,7 +42,7 @@ credits:
 	script/credits-npm > CREDITS.npm.json
 
 .PHONY: generate
-generate: deps
+generate:
 	touch AUTHORS
 	touch CREDITS.go.json CREDITS.npm.json
 	GOOS= GOARCH= ${GO} generate -x ./...
