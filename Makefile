@@ -41,6 +41,7 @@ npmbuild:
 credits:
 	GOOS= GOARCH= ${GO} run script/genauthors/genauthors.go > AUTHORS
 	GO111MODULE=off GOOS= GOARCH= ${GO} get github.com/Songmu/gocredits/cmd/gocredits
+	${GO} mod download
 	gocredits -json | jq -r '.Licenses|map({"package":.Name,"url":.URL,"license":.Content})' > CREDITS.go.json
 	script/credits-npm > CREDITS.npm.json
 
