@@ -84,7 +84,7 @@ func main() {
 		mux:    mux.NewRouter().SkipClean(true),
 	}
 
-	var fs http.FileSystem = assets.Assets
+	var fs http.FileSystem = http.FS(assets.Assets)
 	if debug {
 		fs = http.Dir("assets")
 	}

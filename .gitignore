@@ -33,7 +33,7 @@ vendor/
 mock_*.go
 
 node_modules/
-/assets/assets.go
+/assets/css/loaders.min.css
 /assets/js/bundle.*
 
 /fireworqonsole

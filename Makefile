@@ -15,12 +15,12 @@ all: clean build
 build: generate
 	npm install
 	npm run build
-	GOOS= GOARCH= go-assets-builder -p assets -s /assets -o assets/assets.go assets
+	cp node_modules/loaders.css/loaders.min.css assets/css/loaders.min.css
 	${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=DEBUG" -o ${BUILD_OUTPUT}/$(BIN) .
 
 .PHONY: release
 release: npmbuild deps credits generate
-	GOOS= GOARCH= go-assets-builder -p assets -s /assets -o assets/assets.go assets
+	cp node_modules/loaders.css/loaders.min.css assets/css/loaders.min.css
 	CGO_ENABLED=0 ${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=$(PRERELEASE)" -o ${BUILD_OUTPUT}/$(BIN) .
 
 .PHONY: run
@@ -52,6 +52,6 @@ generate: deps
 
 .PHONY: clean
 clean:
-	rm -f assets/assets.go assets.go CREDITS.go.json CREDITS.npm.json
+	rm -f assets.go assets/css/loaders.min.css assets/js/bundle.* CREDITS.go.json CREDITS.npm.json
 	rm -f $(BIN)
 	${GO} clean || true
