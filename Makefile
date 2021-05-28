@@ -12,26 +12,31 @@ export GO111MODULE=on
 all: clean build
 
 .PHONY: build
-build: generate
-	npm install
-	npm run build
-	cp node_modules/loaders.css/loaders.min.css assets/css/loaders.min.css
+build: npmbuild-dev assets/css/loaders.min.css
+	touch AUTHORS CREDITS.go.json CREDITS.npm.json
 	${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=DEBUG" -o ${BUILD_OUTPUT}/$(BIN) .
 
 .PHONY: release
-release: npmbuild credits generate
-	cp node_modules/loaders.css/loaders.min.css assets/css/loaders.min.css
+release: npmbuild-prod assets/css/loaders.min.css credits
 	CGO_ENABLED=0 ${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=$(PRERELEASE)" -o ${BUILD_OUTPUT}/$(BIN) .
 
 .PHONY: run
 run: build
 	npm run dev & ./${BIN} --bind=${BIND} --node=${NODE} --debug & wait
 
-.PHONY: npmbuild
-npmbuild:
+.PHONY: npmbuild-dev
+npmbuild-dev:
+	npm install
+	npm run build
+
+.PHONY: npmbuild-prod
+npmbuild-prod:
 	npm install
 	npm run build:prod
 	npm prune --production
+
+assets/css/loaders.min.css: node_modules/loaders.css/loaders.min.css
+	cp $< $@
 
 .PHONY: credits
 credits:
@@ -40,12 +45,6 @@ credits:
 	${GO} mod download
 	gocredits -json | jq -r '.Licenses|map({"package":.Name,"url":.URL,"license":.Content})' > CREDITS.go.json
 	script/credits-npm > CREDITS.npm.json
-
-.PHONY: generate
-generate:
-	touch AUTHORS
-	touch CREDITS.go.json CREDITS.npm.json
-	GOOS= GOARCH= ${GO} generate -x ./...
 
 .PHONY: clean
 clean:
