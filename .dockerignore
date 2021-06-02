@@ -2,10 +2,9 @@
 /dist/
 /node_modules/
 /vendoer/
-/assets/assets.go
+/assets/css/loaders.min.css
 /assets/js/bundle.*
 
-/assets.go
 /AUTHORS
 /CREDITS
 /CREDITS.*.json

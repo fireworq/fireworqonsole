@@ -12,46 +12,42 @@ export GO111MODULE=on
 all: clean build
 
 .PHONY: build
-build: generate
-	npm install
-	npm run build
-	GOOS= GOARCH= go-assets-builder -p assets -s /assets -o assets/assets.go assets
+build: npmbuild-dev assets/css/loaders.min.css
+	touch AUTHORS CREDITS.go.json CREDITS.npm.json
 	${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=DEBUG" -o ${BUILD_OUTPUT}/$(BIN) .
 
 .PHONY: release
-release: npmbuild deps credits generate
-	GOOS= GOARCH= go-assets-builder -p assets -s /assets -o assets/assets.go assets
+release: npmbuild-prod assets/css/loaders.min.css credits
 	CGO_ENABLED=0 ${GO} build -ldflags "-X main.Build=$(BUILD) -X main.Prerelease=$(PRERELEASE)" -o ${BUILD_OUTPUT}/$(BIN) .
 
 .PHONY: run
 run: build
 	npm run dev & ./${BIN} --bind=${BIND} --node=${NODE} --debug & wait
 
-.PHONY: deps
-deps:
-	GO111MODULE=off GOOS= GOARCH= ${GO} get github.com/jessevdk/go-assets-builder
+.PHONY: npmbuild-dev
+npmbuild-dev:
+	npm install
+	npm run build
 
-.PHONY: npmbuild
-npmbuild:
+.PHONY: npmbuild-prod
+npmbuild-prod:
 	npm install
 	npm run build:prod
 	npm prune --production
+
+assets/css/loaders.min.css: node_modules/loaders.css/loaders.min.css
+	cp $< $@
 
 .PHONY: credits
 credits:
 	GOOS= GOARCH= ${GO} run script/genauthors/genauthors.go > AUTHORS
 	GO111MODULE=off GOOS= GOARCH= ${GO} get github.com/Songmu/gocredits/cmd/gocredits
+	${GO} mod download
 	gocredits -json | jq -r '.Licenses|map({"package":.Name,"url":.URL,"license":.Content})' > CREDITS.go.json
 	script/credits-npm > CREDITS.npm.json
 
-.PHONY: generate
-generate: deps
-	touch AUTHORS
-	touch CREDITS.go.json CREDITS.npm.json
-	GOOS= GOARCH= ${GO} generate -x ./...
-
 .PHONY: clean
 clean:
-	rm -f assets/assets.go assets.go CREDITS.go.json CREDITS.npm.json
+	rm -f assets/css/loaders.min.css assets/js/bundle.* CREDITS.go.json CREDITS.npm.json
 	rm -f $(BIN)
 	${GO} clean || true
