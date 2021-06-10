@@ -1,7 +1,6 @@
 /.github/
 /dist/
 /node_modules/
-/vendoer/
 /assets/css/loaders.min.css
 /assets/js/bundle.*
 
