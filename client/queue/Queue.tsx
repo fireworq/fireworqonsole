@@ -50,6 +50,8 @@ export class Queue extends React.Component<Props, {}> {
       e.preventDefault();
     };
 
+    const pollingIntervalUnit = typeof queue.pollingInterval === 'number' ? <span className="unit">ms</span> : null;
+
     let queueInfo = noQueue ? <div className="queue none">(no queue)</div> : (
       <div key={'queue-' + queueName}>
         <dl className="queue">
@@ -57,19 +59,22 @@ export class Queue extends React.Component<Props, {}> {
           <dd><Node queueName={queueName} /></dd>
 
           <dt>Polling interval</dt>
-          <dd className="config-value"><Link to={pathQueueEdit(queueName)}>
-            {this.props.editing ? (
-               <input name="polling-interval" defaultValue={pollingIntervalValue} placeholder="200" />
-            ) : queue.pollingInterval}
-            {typeof queue.pollingInterval === 'number' ? <span className="unit">ms</span> : null}
-          </Link></dd>
+          <dd className="config-value">
+            {this.props.editing ?
+               <><input name="polling-interval" defaultValue={pollingIntervalValue} placeholder="200" /> {pollingIntervalUnit}</>
+            :
+               <Link to={pathQueueEdit(queueName)}>{queue.pollingInterval} {pollingIntervalUnit}</Link>
+            }
+          </dd>
 
           <dt>Max workers</dt>
-          <dd className="config-value"><Link to={pathQueueEdit(queueName)}>
-            {this.props.editing ? (
+          <dd className="config-value">
+            {this.props.editing ?
                <input name="max-workers" defaultValue={maxWorkersValue} placeholder="20" />
-            ) : queue.maxWorkers}
-          </Link></dd>
+            :
+               <Link to={pathQueueEdit(queueName)}>{queue.maxWorkers}</Link>
+            }
+          </dd>
 
           <dt>Stats</dt>
           <dd className="stats chart"><Stats queueName={queueName} autoReload={true} /></dd>
