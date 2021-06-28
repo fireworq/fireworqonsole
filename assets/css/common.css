@@ -519,7 +519,7 @@ dl.settings .setting-diff .setting-value {
   color: #555555;
   float: left;
   clear: both;
-  width: 8em;
+  width: 14em;
 }
 
 .queue-list .queue dl.config dd {
