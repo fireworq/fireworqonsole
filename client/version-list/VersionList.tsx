@@ -76,7 +76,7 @@ export class VersionList extends React.Component<Props, {}> {
                e.stopPropagation()
                e.preventDefault()
            }}>
-             <label><span className="label-text">New</span>
+             <label><span className="label-text" role="button">New</span>
                <input className="new-node-url" name="node-url" defaultValue="" placeholder=" http://localhost:8080" />
                <button type="submit">Add</button>
              </label>
