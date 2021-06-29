@@ -42,6 +42,10 @@ export class Queue extends React.Component<Props, {}> {
       queue.pollingInterval ? queue.pollingInterval + '' : '';
     const maxWorkersValue =
       queue.maxWorkers ? queue.maxWorkers + '' : '';
+    const maxDispatchesPerSecond =
+      queue.maxDispatchesPerSecond ? queue.maxDispatchesPerSecond + '' : '';
+    const maxBurstSize =
+      queue.maxBurstSize ? queue.maxBurstSize + '' : '';
 
     const deleteQueue = (e: React.SyntheticEvent<any>) => {
       if (confirm("Are you sure you want to delete queue '" + queueName + "'?\n\nNote that all routings related to the queue are also deleted."))
@@ -76,6 +80,38 @@ export class Queue extends React.Component<Props, {}> {
             }
           </dd>
 
+          {this.props.editing ?
+            <>
+              <dt>Max Dispatches Per Second</dt>
+              <dd className="config-value">
+                <input name="max-dispatches-per-second" defaultValue={maxDispatchesPerSecond} placeholder="1.0" />
+              </dd>
+            </>
+          : queue.maxDispatchesPerSecond ?
+            <>
+              <dt>Max Dispatches Per Second</dt>
+              <dd className="config-value">
+                <Link to={pathQueueEdit(queueName)}>{queue.maxDispatchesPerSecond}</Link>
+              </dd>
+            </>
+          : null}
+
+          {this.props.editing ?
+            <>
+              <dt>Max Burst Size</dt>
+              <dd className="config-value">
+                <input name="max-burst-size" defaultValue={maxBurstSize} placeholder="5" />
+              </dd>
+            </>
+          : queue.maxBurstSize ?
+            <>
+              <dt>Max Burst Size</dt>
+              <dd className="config-value">
+                <Link to={pathQueueEdit(queueName)}>{queue.maxBurstSize}</Link>
+              </dd>
+            </>
+          : null}
+
           <dt>Stats</dt>
           <dd className="stats chart"><Stats queueName={queueName} autoReload={true} /></dd>
         </dl>
@@ -108,9 +144,14 @@ export class Queue extends React.Component<Props, {}> {
                if (this.props.value.savingCount !== 0) return;
 
                const formData = new FormData(e.target as HTMLFormElement);
+               const mdps = formData.get('max-dispatches-per-second');
+               const maxBurstSize = formData.get('max-burst-size')
+
                this.props.actions.asyncPutQueue(queueName, {
                  polling_interval: parseInt(formData.get('polling-interval') as string || '', 10),
-                 max_workers: parseInt(formData.get('max-workers') as string || '', 10)
+                 max_workers: parseInt(formData.get('max-workers') as string || '', 10),
+                 max_dispatches_per_second: mdps ? parseFloat(mdps as string) : undefined,
+                 max_burst_size: maxBurstSize ? parseInt(maxBurstSize as string, 10) : undefined,
                });
            }}>
              {queueInfo}

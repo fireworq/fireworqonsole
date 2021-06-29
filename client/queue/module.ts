@@ -127,6 +127,8 @@ export interface Queue {
   name: string
   pollingInterval: number | string
   maxWorkers: number
+  maxDispatchesPerSecond?: number
+  maxBurstSize?: number
 };
 
 export interface QueueState {

@@ -94,11 +94,26 @@ export class QueueList extends React.Component<Props, {}> {
           </div>
 
           <Link to={pathQueueEdit(queue.name)}><dl className="config">
-            <dt>polling interval</dt>
-            <dd>{queue.pollingInterval} {typeof queue.pollingInterval === 'number' ? 'ms' : null}</dd>
+            {!queue.maxDispatchesPerSecond ? (
+              <>
+                <dt>polling interval</dt>
+                <dd>{queue.pollingInterval} {typeof queue.pollingInterval === 'number' ? 'ms' : null}</dd>
+              </>
+            ) : null}
 
             <dt>workers</dt>
             <dd><span title="running">{runningWorkers}</span> / <span title="total">{totalWorkers}</span></dd>
+
+            {queue.maxDispatchesPerSecond ? (
+              <>
+                <dt>max dispatches per second</dt>
+                <dd>{queue.maxDispatchesPerSecond}</dd>
+
+                <dt>max burst size</dt>
+                <dd>{queue.maxBurstSize}</dd>
+              </>
+            ) : null}
+
           </dl></Link>
 
           {chart}
