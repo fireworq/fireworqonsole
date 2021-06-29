@@ -80,23 +80,37 @@ export class Queue extends React.Component<Props, {}> {
             }
           </dd>
 
-          <dt>Max Dispatches Per Second</dt>
-          <dd className="config-value">
-            {this.props.editing ?
-               <input name="max-dispatches-per-second" defaultValue={maxDispatchesPerSecond} placeholder="1.0" />
-            :
-               <Link to={pathQueueEdit(queueName)}>{queue.maxDispatchesPerSecond}</Link>
-            }
-          </dd>
+          {this.props.editing ?
+            <>
+              <dt>Max Dispatches Per Second</dt>
+              <dd className="config-value">
+                <input name="max-dispatches-per-second" defaultValue={maxDispatchesPerSecond} placeholder="1.0" />
+              </dd>
+            </>
+          : queue.maxDispatchesPerSecond ?
+            <>
+              <dt>Max Dispatches Per Second</dt>
+              <dd className="config-value">
+                <Link to={pathQueueEdit(queueName)}>{queue.maxDispatchesPerSecond}</Link>
+              </dd>
+            </>
+          : null}
 
-          <dt>Max Burst Size</dt>
-          <dd className="config-value">
-            {this.props.editing ?
-               <input name="max-burst-size" defaultValue={maxBurstSize} placeholder="5" />
-            :
-               <Link to={pathQueueEdit(queueName)}>{queue.maxBurstSize}</Link>
-            }
-          </dd>
+          {this.props.editing ?
+            <>
+              <dt>Max Burst Size</dt>
+              <dd className="config-value">
+                <input name="max-burst-size" defaultValue={maxBurstSize} placeholder="5" />
+              </dd>
+            </>
+          : queue.maxBurstSize ?
+            <>
+              <dt>Max Burst Size</dt>
+              <dd className="config-value">
+                <Link to={pathQueueEdit(queueName)}>{queue.maxBurstSize}</Link>
+              </dd>
+            </>
+          : null}
 
           <dt>Stats</dt>
           <dd className="stats chart"><Stats queueName={queueName} autoReload={true} /></dd>
