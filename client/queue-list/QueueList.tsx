@@ -124,7 +124,7 @@ export class QueueList extends React.Component<Props, {}> {
             e.stopPropagation()
             e.preventDefault()
         }}>
-          <label><span className="label-text">New</span>
+          <label><span className="label-text" role="button">New</span>
             <input className="new-queue-name" name="queue-name" defaultValue="" placeholder=" queue name" />
             <button type="submit">Add</button>
           </label>

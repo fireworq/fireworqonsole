@@ -71,7 +71,7 @@ export class RoutingList extends React.Component<Props, {}> {
             e.stopPropagation()
             e.preventDefault()
         }}>
-          <label><span className="label-text">New</span>
+          <label><span className="label-text" role="button">New</span>
             <input className="new-job-category" name="job-category" defaultValue="" placeholder=" job category" />
             <button type="submit">Add</button>
           </label>
