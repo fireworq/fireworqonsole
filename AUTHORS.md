@@ -11,7 +11,7 @@ This is the official list of Fireworqonsole authors for copyright purposes.
 |INA Lintaro|<tarao.gnn@gmail.com>|[@tarao](https://github.com/tarao)|488|
 |itchyny|<itchyny@hatena.ne.jp>||58|
 |Tomohiro Nishimura|<tomohiro68@gmail.com>|[@Sixeight](https://github.com/Sixeight)|19|
-|yigarashi|<yigarashi@hatena.ne.jp>||7|
+|yigarashi|<yigarashi@hatena.ne.jp>||8|
 |MURATA Satoshi|<rw.satoshi.murata@gmail.com>||1|
 
 Items are automatically added by `git shortlog -sne`.  Please add rules to [`.mailmap`](.mailmap) to keep it canonical (see "MAPPING AUTHORS" section of `git help shortlog` for the notation of the rules).  E-mail field must match your public E-mail setting on your GitHub account if you wish to show your GitHub account name.
