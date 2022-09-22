@@ -32,7 +32,7 @@ export class ActionDispatcher {
   public async asyncGetNodeVersions(): Promise<void> {
     this.dispatch(fetchStarted());
     try {
-      const path = '/api/versions';
+      const path = '/version';
       const response: Response = await fetch(path, {
         method: 'GET'
       });
