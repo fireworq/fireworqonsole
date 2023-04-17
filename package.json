@@ -10,7 +10,7 @@
   "author": "tarao",
   "license": "MIT",
   "devDependencies": {
-    "@types/isomorphic-fetch": "0.0.35",
+    "@types/isomorphic-fetch": "0.0.36",
     "@types/react": "17.0.39",
     "@types/react-dom": "17.0.11",
     "@types/react-redux": "7.1.22",
