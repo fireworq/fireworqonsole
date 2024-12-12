@@ -6,7 +6,6 @@ require (
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/mux v1.8.1
 	github.com/lestrrat-go/server-starter v0.0.0-20210101230921-50cd1900b5bc
-	github.com/sirupsen/logrus v1.8.1
-	github.com/stretchr/testify v1.4.0 // indirect
+	github.com/sirupsen/logrus v1.9.3
 	golang.org/x/net v0.0.0-20211216030914-fe4d6282115f
 )
